@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   
     onLoginSuccessful(result){
       console.log(result);
-      this.ngZone.run(() => this.router.navigateByUrl('/contact-list'));
+      this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));
     }
   
     logOut() {

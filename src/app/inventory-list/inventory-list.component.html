@@ -1,0 +1,60 @@
+<div class="container" style="margin-top: 100px;">
+    <div class="title">
+    &nbsp;
+    <label>Search&nbsp;
+      <input [(ngModel)]="searchText" type="text" name="fileName"> 
+    </label>  
+    <span aria-hidden="true" (click)="clearSearch()" class="text-danger fa-2x">&times;</span>
+    </div>
+    <table class="table table-hover">
+        <thead class="title">
+          <tr>
+            <th></th>
+            <th nowrap><button  (click)="sort(true, 'item_id')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                   <button  (click)="sort(false, 'item_id')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'source')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Source                    <button  (click)="sort(false, 'source')"     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'notes')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Notes                     <button  (click)="sort(false, 'notes')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'location')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Location                  <button  (click)="sort(false, 'location')"   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'value')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Value                     <button  (click)="sort(false, 'value')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'inventory_date')"            class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>inventory Date            <button  (click)="sort(false, 'inventory_date')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'selected_file_placeholder')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Placeholder <button  (click)="sort(false, 'selected_file_placeholder')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'artist_name')"               class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Artist Name               <button  (click)="sort(false, 'artist_name')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'title')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Title                     <button  (click)="sort(false, 'title')"       class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'series')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>series                    <button  (click)="sort(false, 'series')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'type')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Type                      <button  (click)="sort(false, 'type')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'date_year')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Date Year                 <button  (click)="sort(false, 'date_year')"  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let inventory of inventoryService.inventory$| async">
+          <tr *ngIf="inventory.includes_string(searchText)">
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-primary" (click)="selectInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
+                <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+              </div>  
+            </td>
+            <td nowrap> {{ inventory.item_id }} </td>
+            <td nowrap> {{ inventory.source }}</td>
+            <td nowrap> {{ inventory.notes }}</td>
+            <td nowrap> {{ inventory.location }}</td>
+            <td nowrap> {{ inventory.value }}</td>
+            <td nowrap> {{ inventory.inventory_date }}</td>
+            <td nowrap> {{ inventory.selected_file_placeholder }}</td>
+            <td nowrap> {{ inventory.artist_name }}</td>
+            <td nowrap> {{ inventory.title }}</td>
+            <td nowrap> {{ inventory.series }}</td>
+            <td nowrap> {{ inventory.type}}</td>
+            <td nowrap> {{ inventory.date_year }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-primary" (click)="selectContact(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
+                <button class="btn btn-primary" (click)="deleteContact(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+              </div>  
+            </td>
+          </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    
+  

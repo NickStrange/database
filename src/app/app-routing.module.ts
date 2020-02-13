@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContactCreateComponent } from './contact-create/contact-create.component';
-import { ContactListComponent } from './contact-list/contact-list.component';
+import { InventoryCreateComponent } from './inventory-create/inventory-create.component';
+import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { FilesComponent } from './files/files.component';
 import { LoginComponent } from './login/login.component';
 
@@ -13,15 +13,15 @@ const routes: Routes = [
       children: [
         {
           path: '',
-          component: ContactCreateComponent
+          component: InventoryCreateComponent
         },
         {
           path: ':id',
-          component: ContactCreateComponent
+          component: InventoryCreateComponent
         }
       ]
     },
-  {path: "contact-list", component: ContactListComponent},
+  {path: "inventory-list", component: InventoryListComponent},
   {path: "files", component: FilesComponent}
 ];
 

@@ -3,8 +3,6 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { ContactCreateComponent } from "./contact-create/contact-create.component";
-import { ContactListComponent } from "./contact-list/contact-list.component";
 import { HeaderComponent } from "./header/header.component";
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -21,19 +19,21 @@ import { DialogComponent } from './dialog/dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule, MatFormFieldModule } from '@angular/material';
+import { InventoryListComponent } from './inventory-list/inventory-list.component';
+import { InventoryCreateComponent } from './inventory-create/inventory-create.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactCreateComponent,
-    ContactListComponent,
     HeaderComponent,
     FilesComponent,
     LoginComponent,
     DialogComponent,
-    DialogComponent
+    DialogComponent,
+    InventoryListComponent,
+    InventoryCreateComponent
   ],
   imports: [BrowserModule, 
     AppRoutingModule, 
