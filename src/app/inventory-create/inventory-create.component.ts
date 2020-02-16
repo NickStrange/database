@@ -30,7 +30,7 @@ export class InventoryCreateComponent implements OnInit {
       this.inventory = new Inventory("", 
               "", "", "", "", "", "", "", "", "", "",
               "", "", "", "", "", "", "", "", "", "",
-              "", "", "", "", "", "");
+              "", "", "", "", "", "","");
       console.log('create new empty contact ', this.inventory);
     }
     else {

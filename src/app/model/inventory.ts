@@ -16,13 +16,14 @@ export class Inventory {
                 public medium: string,
                 public signatures_and_writing: string,
                 public condition: string,
+                public category: string,
                 public height: string,
                 public width: string,
                 public depth: string,
                 public size_notes: string,
                 public size_units: string,
                 public dimensions: string,
-                public selected_file: string,
+                public selected_file_container: string,
                 public file1: string,
                 public file2: string,
                 public file3: string,
@@ -47,13 +48,14 @@ export class Inventory {
         this.medium + " " +
         this.signatures_and_writing + " " +
         this.condition + " " +
+        this.category + " " +
         this.height + " " +
         this.width + " " +
         this.depth + " " +
         this.size_notes + " " +
         this.size_units + " " +
         this.dimensions + " " +
-        this.selected_file + " " +
+        this.selected_file_container + " " +
         this.file1 + " " +
         this.file2 + " " +
         this.file3 + " " +

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
 import { Observable } from 'rxjs';
-import { faPencilAlt, faTrash, faChevronCircleUp, faChevronCircleDown} from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faTrash, faChevronCircleUp, faChevronCircleDown, faEye} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -22,6 +22,7 @@ export class InventoryListComponent implements OnInit {
   faTrash = faTrash;
   faChevronUp = faChevronCircleUp;
   faChevronDown = faChevronCircleDown;
+  faeyeicon = faEye;
   searchText : String='';
 
   inventory: Inventory[];
@@ -35,12 +36,17 @@ export class InventoryListComponent implements OnInit {
     this.inventory = this.inventoryService.inventory; 
   }
 
-  public selectContact(inventory: Inventory){
-    this.router.navigateByUrl(`contact-create/${inventory.item_id}`);
+  public showInventory(inventory: Inventory){
+    this.router.navigateByUrl(`inventory-create/${inventory.item_id}`);
     this.selectedInventory = inventory;
   }
 
-  public deleteContact(inventory: Inventory){
+  public updateInventory(inventory: Inventory){
+    this.router.navigateByUrl(`inventory-create/${inventory.item_id}`);
+    this.selectedInventory = inventory;
+  }
+
+  public deleteInventory(inventory: Inventory){
     this.dialogService.openDialog('Delete', inventory.shortName(), 'No', 'Yes').subscribe(
         deleteflg => {
           if (deleteflg) {

@@ -2,11 +2,25 @@
 <div class="container title">
   <button class="btn btn-primary" (click)="writeCsv()">Save Local File</button>
   &nbsp;
+  <label>File Name
+      <input [(ngModel)]="fileName" type="text" name="fileName"> 
+  </label>
   <ng-container *ngIf="isAdmin$|async">
-    <label>File Name
+    <div class="container">
+      <div class="col-md-8 form-group">
+      <input type="file" class="form-control btn btn-primary" (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">
+      </div>
+      </div>
+    <!--label>File Name
       <input [(ngModel)]="fileName" type="text" name="fileName"> 
     </label>
     &nbsp;
-    <input class="btn btn-primary"  type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />    
+    <input class="btn btn-primary"  type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" /-->    
 </ng-container>
 </div>
+
+<div class="container">
+  <div class="col-md-8 form-group">
+  <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">
+  </div>
+  </div>

@@ -10,18 +10,39 @@
         <thead class="title">
           <tr>
             <th></th>
-            <th nowrap><button  (click)="sort(true, 'item_id')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                   <button  (click)="sort(false, 'item_id')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'source')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Source                    <button  (click)="sort(false, 'source')"     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'notes')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Notes                     <button  (click)="sort(false, 'notes')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'location')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Location                  <button  (click)="sort(false, 'location')"   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'value')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Value                     <button  (click)="sort(false, 'value')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'inventory_date')"            class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>inventory Date            <button  (click)="sort(false, 'inventory_date')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'selected_file_placeholder')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Placeholder <button  (click)="sort(false, 'selected_file_placeholder')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'artist_name')"               class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Artist Name               <button  (click)="sort(false, 'artist_name')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'title')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Title                     <button  (click)="sort(false, 'title')"       class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'series')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>series                    <button  (click)="sort(false, 'series')"    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'type')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Type                      <button  (click)="sort(false, 'type')"      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th nowrap><button  (click)="sort(true, 'date_year')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Date Year                 <button  (click)="sort(false, 'date_year')"  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'item_id')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                   <button  (click)="sort(false, 'item_id')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'source')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Source                    <button  (click)="sort(false, 'source')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'notes')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Notes                     <button  (click)="sort(false, 'notes')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'location')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Location                  <button  (click)="sort(false, 'location')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'value')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Value                     <button  (click)="sort(false, 'value')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'inventory_date')"            class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>inventory Date            <button  (click)="sort(false, 'inventory_date')"             class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'selected_file_placeholder')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Placeholder <button  (click)="sort(false, 'selected_file_placeholder')"  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'artist_name')"               class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Artist Name               <button  (click)="sort(false, 'artist_name')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'title')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Title                     <button  (click)="sort(false, 'title')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'series')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>series                    <button  (click)="sort(false, 'series')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'type')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Type                      <button  (click)="sort(false, 'type')"                       class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'date_year')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Date Year                 <button  (click)="sort(false, 'date_year')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+
+
+            <th nowrap><button  (click)="sort(true, 'medium')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Medium                     <button  (click)="sort(false, 'medium')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'signatures_and_writing')"   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Signatures And Writing     <button  (click)="sort(false, 'signatures_and_writing')"     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'condition')"                class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Condition                  <button  (click)="sort(false, 'condition')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'category')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Category                   <button  (click)="sort(false, 'category')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'height')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Height                     <button  (click)="sort(false, 'Height')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'width')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Width                      <button  (click)="sort(false, 'width')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+ 
+            <th nowrap><button  (click)="sort(true, 'depth')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Depth                       <button  (click)="sort(false, 'depth')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'size_notes')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Size Notes                  <button  (click)="sort(false, 'size_notes')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'size_units')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Size Units                  <button  (click)="sort(false, 'size_units')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'dimensions')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Dimensions                  <button  (click)="sort(false, 'dimensions')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'selected_file_container')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Container     <button  (click)="sort(false, 'selected_file_container')"   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+ 
+            <th nowrap><button  (click)="sort(true, 'file1')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>File1                       <button  (click)="sort(false, 'file1')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'file2')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>File2                       <button  (click)="sort(false, 'file2')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'file3')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>File3                       <button  (click)="sort(false, 'file3')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'file4')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>File4                       <button  (click)="sort(false, 'file4')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+            <th nowrap><button  (click)="sort(true, 'file5')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>File5                       <button  (click)="sort(false, 'file5')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
+
           </tr>
         </thead>
         <tbody>
@@ -29,7 +50,8 @@
           <tr *ngIf="inventory.includes_string(searchText)">
             <td>
               <div class="btn-group">
-                <button class="btn btn-primary" (click)="selectInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
+                <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon [icon]="faeyeicon"></fa-icon></button>
+                <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                 <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
               </div>  
             </td>
@@ -45,10 +67,29 @@
             <td nowrap> {{ inventory.series }}</td>
             <td nowrap> {{ inventory.type}}</td>
             <td nowrap> {{ inventory.date_year }}</td>
+            <td nowrap> {{ inventory.medium }}</td>
+            <td nowrap> {{ inventory.signatures_and_writing }}</td>
+            <td nowrap> {{ inventory.condition }}</td>
+            <td nowrap> {{ inventory.category }}</td>
+            <td nowrap> {{ inventory.height }}</td>
+            <td nowrap> {{ inventory.width }}</td>
+            <td nowrap> {{ inventory.depth }}</td>
+            <td nowrap> {{ inventory.size_notes }}</td>
+            <td nowrap> {{ inventory.size_units }}</td>
+            <td nowrap> {{ inventory.dimensions }}</td>
+            <td nowrap> {{ inventory.selected_file_container }}</td>
+            <td nowrap> {{ inventory.file1 }}</td>
+            <td nowrap> {{ inventory.file2 }}</td>
+            <td nowrap> {{ inventory.file3 }}</td>
+            <td nowrap> {{ inventory.file4 }}</td>
+            <td nowrap> {{ inventory.file5 }}</td>
+
+
             <td>
               <div class="btn-group">
-                <button class="btn btn-primary" (click)="selectContact(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
-                <button class="btn btn-primary" (click)="deleteContact(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon [icon]="faeyeicon"></fa-icon></button>
+                <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
+                <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
               </div>  
             </td>
           </tr>
