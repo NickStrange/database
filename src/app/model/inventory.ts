@@ -1,4 +1,8 @@
+import { Observable } from 'rxjs';
+
 export class Inventory {
+
+    url$: Observable<string>;
 
     constructor(
                 public item_id: string,
@@ -29,6 +33,14 @@ export class Inventory {
                 public file3: string,
                 public file4: string,
                 public file5: string){}
+
+     setUrl(url){
+         this.url$=url;
+     }
+            
+     getUrl():Observable<string>{
+       return this.url$;
+    }
                 
     
     toString():string{

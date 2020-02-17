@@ -3,11 +3,10 @@ import { InventoryService } from '../services/inventory.service';
 import { Observable } from 'rxjs';
 import { faPencilAlt, faTrash, faChevronCircleUp, faChevronCircleDown, faEye} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DialogService } from '../services/dialog.service';
 import { Inventory } from '../model/inventory';
 import { AuthService } from '../services/auth.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-inventory-list',
@@ -26,11 +25,14 @@ export class InventoryListComponent implements OnInit {
   selectedInventory: Inventory;
 
   constructor(public inventoryService: InventoryService, private router:Router,
-              private dialogService: DialogService, public authService: AuthService) { }
+              private dialogService: DialogService, public authService: AuthService
+              ,private storage: AngularFireStorage
+              ) { }
 
   ngOnInit() {
     this.inventoryService.doInventory();
     this.inventory = this.inventoryService.inventory; 
+    this.getUrl()
   }
 
   public showInventory(inventory: Inventory){
@@ -46,6 +48,7 @@ export class InventoryListComponent implements OnInit {
   }
 
   public deleteInventory(inventory: Inventory){
+    console.log('Deletimg ', inventory)
     this.dialogService.openDialog('Delete', inventory.shortName(), 'No', 'Yes').subscribe(
         deleteflg => {
           if (deleteflg) {
@@ -53,6 +56,12 @@ export class InventoryListComponent implements OnInit {
           }
        }
     );
+  }
+  url$: Observable<string>;
+
+  getUrl(){
+   var storageRef = this.storage.ref('Inventory/AT.P.36.jpg');
+   this.url$= storageRef.getDownloadURL();
   }
 
   clearSearch(){

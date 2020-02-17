@@ -3,6 +3,7 @@ import { Inventory} from '../model/inventory';
 import { Observable, Subscriber, from, onErrorResumeNext } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class InventoryService{
   inventory$: Observable<Inventory[]>;
   observer;
   
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage) { }
 
 
   doInventory(){
@@ -31,9 +32,9 @@ export class InventoryService{
         .pipe(map(snaps => {
             return snaps.map(snap=>{
               let artwork = snap.payload.doc.data() as Inventory
-              return new Inventory(
+              let inv = new Inventory(
                 artwork.item_id,
-                artwork.source,
+                artwork.source, 
                 artwork.notes,
                 artwork.location,
                 artwork.value,
@@ -60,7 +61,12 @@ export class InventoryService{
                 artwork.file3,
                 artwork.file4,
                 artwork.file5
-                );        
+                );  
+                if (artwork.selected_file_container){
+                  let storageRef = this.storage.ref(`Inventory/${artwork.selected_file_container}`);
+                  inv.setUrl(storageRef.getDownloadURL());
+                }
+                return inv;      
       });
      }
     ));
