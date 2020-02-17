@@ -9,14 +9,14 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {path:  "", pathMatch:  "full",redirectTo:  "home"},
   {path: "home", component: LoginComponent},
-  {path: "contact-create", 
+  {path: "inventory-create", 
       children: [
         {
           path: '',
           component: InventoryCreateComponent
         },
         {
-          path: ':id',
+          path: ':item_id/:display',
           component: InventoryCreateComponent
         }
       ]

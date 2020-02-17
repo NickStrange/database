@@ -18,6 +18,7 @@ export class AuthService {
   isLoggedOut$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
   userId$: Observable<string>;
+  isReadWrite$: Observable<boolean>;
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,
     private router:Router, private ngZone: NgZone) { }
@@ -29,16 +30,19 @@ export class AuthService {
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
 
 
-  this.isAdmin$ = new Observable((observer: Subscriber <boolean>) => {
+    this.isAdmin$ = new Observable((observer: Subscriber <boolean>) => {
     this.userId$.subscribe(userid => {
       let isAdmin = this.db.doc(`users/${userid}`)
          .snapshotChanges().subscribe(snap => {
             let user = snap.payload.data() as User;
+            console.log('USER', user);
             observer.next(user? !!user.isAdmin: null)
            },
            err => console.log('Error in ', err))
       })
-      });
+    });
+    this.isReadWrite$ = this.isAdmin$.pipe(isAdmin => isAdmin);
+      
    }
 
    setui(ui){

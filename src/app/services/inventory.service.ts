@@ -31,7 +31,6 @@ export class InventoryService{
         .pipe(map(snaps => {
             return snaps.map(snap=>{
               let artwork = snap.payload.doc.data() as Inventory
-
               return new Inventory(
                 artwork.item_id,
                 artwork.source,

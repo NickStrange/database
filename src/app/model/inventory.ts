@@ -32,7 +32,7 @@ export class Inventory {
                 
     
     toString():string{
-        return 
+        return (
         this.item_id + " " +
         this.source + " " +
         this.notes+ " " +
@@ -60,11 +60,11 @@ export class Inventory {
         this.file2 + " " +
         this.file3 + " " +
         this.file4 + " " +
-        this.file5;
+        this.file5);
     }
     
     includes_string(search: string){
-        // test if string is in the contact
+        // test if string is in the inventory
         return this.toString() == undefined || this.toString().toLowerCase().includes(search.toLowerCase());
     }
 

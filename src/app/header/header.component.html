@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-  <a class="navbar-brand" href="#">Inventory 2.0 {{ authService.isLoggedIn$ | async}}</a>
+  <a class="navbar-brand" href="#">Inventory 2.0  Admin: {{ authService.isAdmin$ | async}} Read Write {{ authService.isReadWrite$ | async}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -13,9 +13,11 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/inventory-list">Inventory</a>
       </li>
+      <ng-container *ngIf="authService.isReadWrite$|async">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/inventory-list-create">Create</a>
+        <a class="nav-link" routerLink="/inventory-create">Create</a>
       </li>
+      </ng-container>
       <li class="nav-item">
         <a class="nav-link" routerLink="/files">Files</a>
       </li>

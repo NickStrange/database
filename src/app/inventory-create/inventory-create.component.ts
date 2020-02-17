@@ -6,7 +6,7 @@ import { MatDialog} from '@angular/material';
 import { DialogService } from '../services/dialog.service';
 
 @Component({
-  selector: 'app-contact-create',
+  selector: 'app-inventory-create',
   templateUrl: './inventory-create.component.html',
   styleUrls: ['./inventory-create.component.css']
 })
@@ -16,6 +16,7 @@ export class InventoryCreateComponent implements OnInit {
   item_id : string;
   isInsert: boolean;
   label: string;
+  display_only: boolean;
 
   constructor(public dataService: InventoryService, private router:Router, 
     private route:ActivatedRoute, private dialog: MatDialog,
@@ -23,6 +24,8 @@ export class InventoryCreateComponent implements OnInit {
 
   ngOnInit() {
     this.item_id = this.route.snapshot.params['item_id'];
+    this.display_only = this.route.snapshot.params['display']=="true";
+    console.log('DISPLAY ', "*"+this.route.snapshot.params['display']+"*",this.display_only);
     this.isInsert = this.item_id == undefined;
     console.log('PASSED insert', this.isInsert);
     if (this.isInsert) {

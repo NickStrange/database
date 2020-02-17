@@ -7,10 +7,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DialogService } from '../services/dialog.service';
 import { Inventory } from '../model/inventory';
-
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-inventory-list',
@@ -29,7 +26,7 @@ export class InventoryListComponent implements OnInit {
   selectedInventory: Inventory;
 
   constructor(public inventoryService: InventoryService, private router:Router,
-              private dialogService: DialogService) { }
+              private dialogService: DialogService, public authService: AuthService) { }
 
   ngOnInit() {
     this.inventoryService.doInventory();
@@ -37,12 +34,14 @@ export class InventoryListComponent implements OnInit {
   }
 
   public showInventory(inventory: Inventory){
-    this.router.navigateByUrl(`inventory-create/${inventory.item_id}`);
+    console.log('show inventory ', inventory);
+    this.router.navigateByUrl(`inventory-create/${inventory.item_id}/true`);
     this.selectedInventory = inventory;
   }
 
   public updateInventory(inventory: Inventory){
-    this.router.navigateByUrl(`inventory-create/${inventory.item_id}`);
+    console.log('update inventory ', inventory);
+    this.router.navigateByUrl(`inventory-create/${inventory.item_id}/false`);
     this.selectedInventory = inventory;
   }
 
@@ -55,11 +54,6 @@ export class InventoryListComponent implements OnInit {
        }
     );
   }
-
-  // generatePdf() {
-  //   let printLabel = new PrintLabelComponent(this.inventoryService.labelgenerator());
-  //   printLabel.generatePdf();
-  // }
 
   clearSearch(){
     this.searchText='';

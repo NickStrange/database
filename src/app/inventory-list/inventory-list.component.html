@@ -51,8 +51,10 @@
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon [icon]="faeyeicon"></fa-icon></button>
+                <ng-container *ngIf="authService.isReadWrite$|async">
                 <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                 <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </ng-container>
               </div>  
             </td>
             <td nowrap> {{ inventory.item_id }} </td>
@@ -88,8 +90,10 @@
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon [icon]="faeyeicon"></fa-icon></button>
-                <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
-                <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                <ng-container *ngIf="authService.isReadWrite$|async">
+                  <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
+                  <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </ng-container>
               </div>  
             </td>
           </tr>
