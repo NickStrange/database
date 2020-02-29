@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
 import { Observable } from 'rxjs';
 import { faPencilAlt, faTrash, faChevronCircleUp, faChevronCircleDown, faEye} from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +11,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
-  styleUrls: ['./inventory-list.component.css']
+  styleUrls: ['./inventory-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryListComponent implements OnInit {
   faPencil = faPencilAlt;
@@ -21,7 +22,6 @@ export class InventoryListComponent implements OnInit {
   faeyeicon = faEye;
   searchText : String='';
 
-  inventory: Inventory[];
   selectedInventory: Inventory;
 
   constructor(public inventoryService: InventoryService, private router:Router,
@@ -30,9 +30,7 @@ export class InventoryListComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.inventoryService.doInventory();
-    this.inventory = this.inventoryService.inventory; 
-    this.getUrl()
+     this.inventoryService.doInventory();
   }
 
   public showInventory(inventory: Inventory){

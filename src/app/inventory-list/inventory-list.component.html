@@ -11,14 +11,13 @@
         <thead class="title">
           <tr>
             <th></th>
+            <th nowrap><button  (click)="sort(true, 'index')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Index                     <button  (click)="sort(false, 'index')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'item_id')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                   <button  (click)="sort(false, 'item_id')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'source')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Source                    <button  (click)="sort(false, 'source')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'notes')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Notes                     <button  (click)="sort(false, 'notes')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'location')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Location                  <button  (click)="sort(false, 'location')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'value')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Value                     <button  (click)="sort(false, 'value')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'inventory_date')"            class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>inventory Date            <button  (click)="sort(false, 'inventory_date')"             class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <!--th nowrap><button  (click)="sort(true, 'selected_file_placeholder')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Placeholder <button  (click)="sort(false, 'selected_file_placeholder')"  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th-->
-            <th nowrap><button  (click)="sort(true, 'artist_name')"               class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Artist Name               <button  (click)="sort(false, 'artist_name')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'title')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Title                     <button  (click)="sort(false, 'title')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'series')"                    class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>series                    <button  (click)="sort(false, 'series')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'type')"                      class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Type                      <button  (click)="sort(false, 'type')"                       class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
@@ -34,10 +33,6 @@
  
             <th nowrap><button  (click)="sort(true, 'depth')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Depth                       <button  (click)="sort(false, 'depth')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'size_notes')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Size Notes                  <button  (click)="sort(false, 'size_notes')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <!--th nowrap><button  (click)="sort(true, 'size_units')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Size Units                  <button  (click)="sort(false, 'size_units')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th-->
-            <!--th nowrap><button  (click)="sort(true, 'dimensions')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Dimensions                  <button  (click)="sort(false, 'dimensions')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th-->
-            <!--th nowrap><button  (click)="sort(true, 'selected_file_container')" class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Selected File Container     <button  (click)="sort(false, 'selected_file_container')"   class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th-->
- 
             <th>File1</th>
             <th>File2</th>
             <th>File3</th>
@@ -46,41 +41,38 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let inventory of inventoryService.inventory$| async">
-          <tr *ngIf="inventory.includes_string(searchText)">
+          <ng-container *ngFor="let inventory of inventoryService.inventory">
+          <tr> <!--</tr> *ngIf="inventory.includes_string(searchText)"-->
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
-                <ng-container *ngIf="authService.isReadWrite$|async">
+                <!-- <ng-container *ngIf="authService.isReadWrite$|async">
                 <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                 <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                </ng-container>
+                </ng-container> -->
               </div>  
             </td>
+            <td nowrap> {{ inventory.index }} </td>
             <td nowrap> {{ inventory.item_id }} </td>
             <td nowrap> {{ inventory.source }}</td>
-            <td nowrap> {{ inventory.notes }}</td>
-            <td nowrap> {{ inventory.location }}</td>
+            <td       > {{ inventory.notes }}</td>
+            <td       > {{ inventory.location }}</td>
             <td nowrap> {{ inventory.value }}</td>
             <td nowrap> {{ inventory.inventory_date }}</td>
-            <!--td nowrap> {{ inventory.selected_file_placeholder }}</td-->
-            <td nowrap> {{ inventory.artist_name }}</td>
             <td nowrap> {{ inventory.title }}</td>
-            <td nowrap> {{ inventory.series }}</td>
+            <td       > {{ inventory.series }}</td>
             <td nowrap> {{ inventory.type}}</td>
             <td nowrap> {{ inventory.date_year }}</td>
-            <td nowrap> {{ inventory.medium }}</td>
-            <td > {{ inventory.signatures_and_writing }}</td>
-            <td nowrap> {{ inventory.condition }}</td>
+            <td       > {{ inventory.medium }}</td>
+            <td       > {{ inventory.signatures_and_writing }}</td>
+            <td       > {{ inventory.condition }}</td>
             <td nowrap> {{ inventory.category }}</td>
             <td nowrap> {{ inventory.height }}</td>
             <td nowrap> {{ inventory.width }}</td>
             <td nowrap> {{ inventory.depth }}</td>
             <td nowrap> {{ inventory.size_notes }}</td>
-            <!--td nowrap> {{ inventory.size_units }}</td-->
-            <!--td nowrap> {{ inventory.dimensions }}</td-->
-            <!--td nowrap> {{ inventory.selected_file_container }}</td-->
-            <td nowrap> <ng-container *ngIf="(inventory.getUrl() | async) as url;"><img width="50" [src]="url"></ng-container></td>
+            <!--td nowrap> <ng-container *ngIf="(inventory.getUrl() | async) as url;"><img width="50" [src]="url"></ng-container></td-->
+            <td nowrap> {{ inventory.file1 }}</td>
             <td nowrap> {{ inventory.file2 }}</td>
             <td nowrap> {{ inventory.file3 }}</td>
             <td nowrap> {{ inventory.file4 }}</td>
@@ -90,10 +82,10 @@
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
-                <ng-container *ngIf="authService.isReadWrite$|async">
+                <!-- <ng-container *ngIf="authService.isReadWrite$|async">
                   <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                   <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                </ng-container>
+                </ng-container> -->
               </div>  
             </td>
           </tr>

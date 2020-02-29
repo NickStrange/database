@@ -30,10 +30,7 @@ export class InventoryCreateComponent implements OnInit {
     console.log('PASSED insert', this.isInsert);
     if (this.isInsert) {
       this.label = 'Create';
-      this.inventory = new Inventory("", 
-              "", "", "", "", "", "", "", "", "", "",
-              "", "", "", "", "", "", "", "", "", "",
-              "", "", "", "", "", "","");
+      this.inventory = new Inventory('','','');
       console.log('create new empty contact ', this.inventory);
     }
     else {
