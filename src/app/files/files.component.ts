@@ -60,11 +60,32 @@ export class FilesComponent {
       for (let row  of dat) {
         const inventory_item:Inventory = Inventory.makeInventory(row as any)
         console.log("create3", inventory_item.index);
-        this.inventoryService.createInventory(inventory_item);
+        //if (inventory_item.image1) {
+        //  this.inventoryService.getUrl(inventory_item.image1).subscribe(url => inventory_item.url1 = url);
+        //}
+        inventory_item.url1 = 'NA';
+        this.get_url_for_index(inventory_item, '1');
+        //this.inventoryService.createInventory(inventory_item);
       }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
+
+
+   get_url_for_index(inventory: Inventory, offset:string){
+    console.log('reading ', inventory['image'+offset])
+    const image = Inventory.decode_image_name(inventory['file'+offset]);
+    inventory['image'+offset] = image;
+    if (image) {
+        this.inventoryService.getUrl(inventory['image'+offset]).
+        subscribe(url => {inventory['url'+offset] = url;
+        console.log('URL ', url);
+        this.inventoryService.createInventory(inventory);
+        });
+    }
+    this.inventoryService.createInventory(inventory);
+    console.log('read' , inventory['image'+offset])
+}
 
   exportAsExcelFile(excelFileName: string): void {
     let json: any[] = this.inventoryService.inventory;

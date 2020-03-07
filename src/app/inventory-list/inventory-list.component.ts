@@ -57,8 +57,8 @@ export class InventoryListComponent implements OnInit {
   }
   url$: Observable<string>;
 
-  getUrl(){
-   var storageRef = this.storage.ref('Inventory/AT.P.36.jpg');
+  getUrl(file_name){
+   var storageRef = this.storage.ref(`Inventory/${file_name}`);
    this.url$= storageRef.getDownloadURL();
   }
 

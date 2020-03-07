@@ -9,7 +9,7 @@
           <form>
             
             <div class="form-group form-inline">
-              <!-- <ng-container *ngIf="(inventory.getUrl() | async) as url;"><img width="500" [src]="url"></ng-container> -->
+              <ng-container *ngIf="inventory.url1 as url;"><img width="500" [src]="url"></ng-container>
               
               <label for="item_id">Item Id</label>&nbsp;
               <input readonly [(ngModel)]="inventory.item_id" type="text" name="item_id" class="form-control" id="item_id">
@@ -58,16 +58,23 @@
               <label for="size_notes">Size Notes</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.size_notes" type="text" name="size_notes" class="form-control">
             </div>
+            
+            <label for="file1">File1</label>&nbsp;
+            <input [readOnly]="display_only" [(ngModel)]="inventory.file1" type="text" name="file1" class="form-control" id="file1">
+            <input [readOnly]="display_only" [(ngModel)]="inventory.image1" type="text" name="image1`" class="form-control" id="image1">
+            <input [readOnly]="display_only" [(ngModel)]="inventory.url1" type="text" name="url1" class="form-control" id="url1">
+          
               <label for="file2">File2</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.file2" type="text" name="file2" class="form-control" id="file2">
               <label for="file3">File3</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.file3" type="text" name="file3" class="form-control" id="file3">
-            <div class="form-group form-inline">
+             <div class="form-group form-inline">
               <label for="file4">File4</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.file4" type="text" name="file4" class="form-control" id="file4">
               <label for="file5">File5</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.file5" type="text" name="file5" class="form-control" id="file5">
             </div>
+            
           </form>
           <button class="btn btn-primary" (click)="createContact()">{{label}} contact</button>
           &nbsp;

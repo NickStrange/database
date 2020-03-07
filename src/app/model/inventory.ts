@@ -33,16 +33,20 @@ export class Inventory {
         public file3:string = '',
         public file4:string = '',
         public file5:string = '',
+        public image1:string = '',
+        public image2:string = '',
+        public image3:string = '',
+        public image4:string = '',
+        public image5:string = '',
         public url1:string = '',
         public url2:string = '',
         public url3:string = '',
         public url4:string = '',
         public url5:string = ''  ){
-        console.log('constructor create', this.toString());
     }
 
     public static makeInventory(row): Inventory{
-        return new Inventory(
+        let inventory = new Inventory(
             row.index,
             row.item_id,
             row.source,
@@ -70,12 +74,34 @@ export class Inventory {
             row.file3,
             row.file4,
             row.file5,
+            row.image1,
+            row.image2,
+            row.image3,
+            row.image4,
+            row.image5,
             row.url1,
             row.url2,
             row.url3,
             row.url4,
-            row.url5   
+            row.url5
+           // Inventory.decode_image_name(row.file1),
+           // Inventory.decode_image_name(row.file2),
+           // Inventory.decode_image_name(row.file3),
+           // Inventory.decode_image_name(row.file4),
+           // Inventory.decode_image_name(row.file5),  
         );
+
+        return inventory;
+    }
+
+    public static decode_image_name(val): string{
+        const myRe = /.*remote:(.*jpg).*/;
+        const result = myRe.exec(val);
+        if (result){    
+            console.log('SEARCH',val, 'FOUND', result[1]);
+            return result[1]
+        }
+        return '';
     }
 
                 

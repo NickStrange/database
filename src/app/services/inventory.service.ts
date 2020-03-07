@@ -31,12 +31,24 @@ export class InventoryService implements OnInit{
             return snaps.map(snap=>{
               const data = snap.payload.doc.data();
               const inventory_item: Inventory = Inventory.makeInventory(data);
-              console.log('done', inventory_item.toString());
+              console.log('done', inventory_item);
               this.inventory.push(inventory_item);
       });
      }
     )).subscribe();
   }
+
+  getUrl(file_name){
+    try {
+        const storageRef = this.storage.ref(`inventory/${file_name}`);
+        const url = storageRef.getDownloadURL();
+        return url;
+    }
+    catch (FirebaseStorageError){
+     console.log('cant read  ', file_name);
+     return of({});
+    }
+   }
   
   
   public createInventory(inventory_item) : Observable <any>{
