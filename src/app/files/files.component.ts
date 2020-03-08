@@ -63,28 +63,31 @@ export class FilesComponent {
         //if (inventory_item.image1) {
         //  this.inventoryService.getUrl(inventory_item.image1).subscribe(url => inventory_item.url1 = url);
         //}
-        inventory_item.url1 = 'NA';
-        this.get_url_for_index(inventory_item, '1');
+        this.get_image_names(inventory_item)
+        this.get_url_for_image(inventory_item);
         //this.inventoryService.createInventory(inventory_item);
       }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
 
+  get_image_names(inventory: Inventory){
+    for (var i = 1; i<6; i++){
+      inventory['image'+i] = Inventory.decode_image_name(inventory['file'+i]);
+    }
 
-   get_url_for_index(inventory: Inventory, offset:string){
-    console.log('reading ', inventory['image'+offset])
-    const image = Inventory.decode_image_name(inventory['file'+offset]);
-    inventory['image'+offset] = image;
-    if (image) {
-        this.inventoryService.getUrl(inventory['image'+offset]).
-        subscribe(url => {inventory['url'+offset] = url;
-        console.log('URL ', url);
+  }
+
+   get_url_for_image(inventory: Inventory){
+    const i = 1;
+    if (inventory['image'+i] ) {
+        this.inventoryService.getUrl(inventory['image'+i]).
+        subscribe(url => {inventory['url'+i] = url;
         this.inventoryService.createInventory(inventory);
         });
     }
     this.inventoryService.createInventory(inventory);
-    console.log('read' , inventory['image'+offset])
+    console.log('read' , inventory['image'+i])
 }
 
   exportAsExcelFile(excelFileName: string): void {

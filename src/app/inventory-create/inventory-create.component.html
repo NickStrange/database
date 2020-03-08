@@ -9,8 +9,13 @@
           <form>
             
             <div class="form-group form-inline">
-              <ng-container *ngIf="inventory.url1 as url;"><img width="500" [src]="url"></ng-container>
-              
+              <ng-container *ngIf="inventory.url1 as url;"><img width="400" [src]="url"></ng-container>
+              <ng-container *ngIf="inventory.url2 as url;"><img width="400" [src]="url"></ng-container>
+              <ng-container *ngIf="inventory.url3 as url;"><img width="400" [src]="url"></ng-container>
+              <ng-container *ngIf="inventory.url4 as url;"><img width="400" [src]="url"></ng-container>
+              <ng-container *ngIf="inventory.url5 as url;"><img width="400" [src]="url"></ng-container>
+            </div>
+            <div class="form-group form-inline">
               <label for="item_id">Item Id</label>&nbsp;
               <input readonly [(ngModel)]="inventory.item_id" type="text" name="item_id" class="form-control" id="item_id">
               <label class="control-label" for="source">Source</label>&nbsp;

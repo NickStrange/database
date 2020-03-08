@@ -26,12 +26,26 @@ export class InventoryService implements OnInit{
 
 
   doInventory(){
-    this.db.collection('inventory').snapshotChanges()  
+    // this.db.collection('inventory').snapshotChanges()  
+    //     .pipe(map(snaps => {
+    //         return snaps.map(snap=>{
+    //           const data = snap.payload.doc.data();
+    //           const inventory_item: Inventory = Inventory.makeInventory(data);
+    //           console.log('done', inventory_item);
+    //           this.inventory.push(inventory_item);
+    //   });
+    //  }
+    // )).subscribe();
+        let count=0;
+        this.db.collection('inventory').stateChanges()
         .pipe(map(snaps => {
-            return snaps.map(snap=>{
+          console.log('SNAPS',snaps);
+            return snaps.map(snap=>{ 
+              const type = snap.type;
               const data = snap.payload.doc.data();
               const inventory_item: Inventory = Inventory.makeInventory(data);
-              console.log('done', inventory_item);
+              count+=1;
+              console.log(count,'done', type,inventory_item);
               this.inventory.push(inventory_item);
       });
      }
