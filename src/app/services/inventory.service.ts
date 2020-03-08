@@ -1,10 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, NgZone } from '@angular/core';
 import { Inventory} from '../model/inventory';
 import { Observable, Subscriber, from, onErrorResumeNext } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,41 +16,52 @@ export class InventoryService implements OnInit{
   inventory: Inventory[] = [];
 
 
-  observer;
+  //observer;
   count = 0;
   
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage) { }
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage,
+    private router:Router, private ngZone: NgZone,) { }
 
   ngOnInit() {
 
   }
 
+  clear_inventory(){
+    this.inventory= []
+  }
+
+  remove_id(id){
+    for (let i =0; i < this.inventory.length ; i++){
+      console.log('delete', id)
+      if (this.inventory[i].item_id == id){
+          this.inventory.splice(i, 1)
+          console.log('deleted', id)
+          break;
+      }
+    }
+    console.log('not deleted', id)
+  }
 
   doInventory(){
-    // this.db.collection('inventory').snapshotChanges()  
-    //     .pipe(map(snaps => {
-    //         return snaps.map(snap=>{
-    //           const data = snap.payload.doc.data();
-    //           const inventory_item: Inventory = Inventory.makeInventory(data);
-    //           console.log('done', inventory_item);
-    //           this.inventory.push(inventory_item);
-    //   });
-    //  }
-    // )).subscribe();
         let count=0;
         this.db.collection('inventory').stateChanges()
         .pipe(map(snaps => {
-          console.log('SNAPS',snaps);
             return snaps.map(snap=>{ 
               const type = snap.type;
               const data = snap.payload.doc.data();
               const inventory_item: Inventory = Inventory.makeInventory(data);
-              count+=1;
+              if (type  != 'added'){
+                this.remove_id(inventory_item.item_id);
+              }
+              else {
+                count+=1;
+              }
               console.log(count,'done', type,inventory_item);
+              
               this.inventory.push(inventory_item);
       });
      }
-    )).subscribe();
+    )).subscribe( x => this.ngZone.run(() => this.router.navigateByUrl('/inventory-list')));
   }
 
   getUrl(file_name){
@@ -63,10 +75,9 @@ export class InventoryService implements OnInit{
      return of({});
     }
    }
-  
+
   
   public createInventory(inventory_item) : Observable <any>{
-    this.inventory.push(inventory_item);
     return from(this.db.doc(`inventory/${inventory_item.item_id}`).set({
       ...inventory_item
     }));
@@ -103,15 +114,22 @@ export class InventoryService implements OnInit{
    //sort array
          this.inventory = this.inventory.sort(function(a, b) {
        // both null - sort by contactId or if both the same
-       if (a[field] === "" && b[field] === "")
+       console.log('TYPE', typeof(a[field]))
+       let fielda = a[field];
+       let fieldb = b[field];
+       if (typeof(a[field])=='string'){
+         fielda = fielda.toLowerCase();
+         fieldb = fieldb.toLowerCase();
+       }
+       if (!a[field]  && !b[field])
            return (a.item_id < b.item_id)? direction: -direction;
        if (a[field] == b[field]) return (a.item_id < b.item_id)? direction: -direction;
-       if (a[field] === "") return 1;
-       if (b[field] === "") return -1;
-       if (a[field].toLowerCase() < b[field].toLowerCase()){
+       if (!a[field]) return 1;
+       if (!b[field]) return -1;
+       if (fielda < fieldb){
          return -1 * direction;
        }
-       if (a[field].toLowerCase() > b[field].toLowerCase()) {
+       if (fielda > fieldb) {
          return 1 * direction;
        }
        return 0;

@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user';
 import { map } from 'rxjs/operators';
+import { InventoryService } from '../services/inventory.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     ui: firebaseui.auth.AuthUI;
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,
-      private router:Router, private ngZone: NgZone, private authService: AuthService) { }
+      private router:Router, private ngZone: NgZone, private authService: AuthService,
+      private inventoryService: InventoryService) { }
   
     ngOnInit() {
       console.log('new ui');
@@ -48,7 +50,9 @@ export class LoginComponent implements OnInit {
   
     onLoginSuccessful(result){
       console.log(result);
-      this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));
+      this.inventoryService.clear_inventory();
+      this.inventoryService.doInventory();
+   //   this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));
     }
   
     logOut() {

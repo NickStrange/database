@@ -64,7 +64,7 @@ export class FilesComponent {
         //  this.inventoryService.getUrl(inventory_item.image1).subscribe(url => inventory_item.url1 = url);
         //}
         this.get_image_names(inventory_item)
-        this.get_url_for_image(inventory_item);
+        this.get_url_for_image(inventory_item).then(dat => this.inventoryService.createInventory(inventory_item))
         //this.inventoryService.createInventory(inventory_item);
       }
     };
@@ -78,17 +78,16 @@ export class FilesComponent {
 
   }
 
-   get_url_for_image(inventory: Inventory){
-    const i = 1;
-    if (inventory['image'+i] ) {
-        this.inventoryService.getUrl(inventory['image'+i]).
-        subscribe(url => {inventory['url'+i] = url;
-        this.inventoryService.createInventory(inventory);
-        });
-    }
-    this.inventoryService.createInventory(inventory);
-    console.log('read' , inventory['image'+i])
-}
+   async get_url_for_image(inventory: Inventory){
+    for (let i = 1; i < 6; i++){
+      if (inventory['image'+i] ) {
+        inventory['url'+i]  = <string> await this.inventoryService.getUrl(inventory['image'+i]).toPromise()
+       // this.inventoryService.createInventory(inventory);
+        };
+    }}
+ //   this.inventoryService.createInventory(inventory);
+ //   console.log('read' , inventory['image'+i])
+
 
   exportAsExcelFile(excelFileName: string): void {
     let json: any[] = this.inventoryService.inventory;

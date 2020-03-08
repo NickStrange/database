@@ -52,14 +52,14 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let inventory of inventoryService.inventory">
-          <tr> <!--</tr> *ngIf="inventory.includes_string(searchText)"-->
+          <tr *ngIf="inventory.includes_string(searchText)">
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
-                <!-- <ng-container *ngIf="authService.isReadWrite$|async">
+                <!-- <ng-container *ngIf="authService.isReadWrite$|async"> -->
                 <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                 <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                </ng-container> -->
+                <!-- </ng-container> -->
               </div>  
             </td>
             <td nowrap> {{ inventory.index }} </td>
@@ -99,10 +99,10 @@
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
-                <!-- <ng-container *ngIf="authService.isReadWrite$|async">
+                <!-- <ng-container *ngIf="authService.isReadWrite$|async"> -->
                   <button class="btn btn-primary" (click)="updateInventory(inventory)"><fa-icon [icon]="faPencil"></fa-icon></button>
                   <button class="btn btn-primary" (click)="deleteInventory(inventory)"><fa-icon [icon]="faTrash"></fa-icon></button>
-                </ng-container> -->
+                <!-- </ng-container> -->
               </div>  
             </td>
           </tr>

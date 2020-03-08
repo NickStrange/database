@@ -30,7 +30,7 @@ export class InventoryListComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-     this.inventoryService.doInventory();
+     //this.inventoryService.doInventory();
   }
 
   public showInventory(inventory: Inventory){
@@ -55,12 +55,12 @@ export class InventoryListComponent implements OnInit {
        }
     );
   }
-  url$: Observable<string>;
+  //url$: Observable<string>;
 
-  getUrl(file_name){
-   var storageRef = this.storage.ref(`Inventory/${file_name}`);
-   this.url$= storageRef.getDownloadURL();
-  }
+  //getUrl(file_name){
+  //var storageRef = this.storage.ref(`Inventory/${file_name}`);
+  // this.url$= storageRef.getDownloadURL();
+  //}
 
   clearSearch(){
     this.searchText='';
