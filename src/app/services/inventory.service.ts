@@ -1,6 +1,6 @@
-import { Injectable, OnInit, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Inventory} from '../model/inventory';
-import { Observable, Subscriber, from, onErrorResumeNext } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -11,20 +11,15 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class InventoryService implements OnInit{
+export class InventoryService  {
 
   inventory: Inventory[] = [];
 
-
-  //observer;
   count = 0;
   
   constructor(private db: AngularFirestore, private storage: AngularFireStorage,
     private router:Router, private ngZone: NgZone,) { }
 
-  ngOnInit() {
-
-  }
 
   clear_inventory(){
     this.inventory= []
@@ -32,14 +27,12 @@ export class InventoryService implements OnInit{
 
   remove_id(id){
     for (let i =0; i < this.inventory.length ; i++){
-      console.log('delete', id)
       if (this.inventory[i].item_id == id){
           this.inventory.splice(i, 1)
           console.log('deleted', id)
           break;
       }
     }
-    console.log('not deleted', id)
   }
 
   doInventory(){
@@ -52,12 +45,11 @@ export class InventoryService implements OnInit{
               const inventory_item: Inventory = Inventory.makeInventory(data);
               if (type  != 'added'){
                 this.remove_id(inventory_item.item_id);
+                console.log('remove', type);
               }
               else {
                 count+=1;
               }
-              console.log(count,'done', type,inventory_item);
-              
               this.inventory.push(inventory_item);
       });
      }
@@ -65,15 +57,9 @@ export class InventoryService implements OnInit{
   }
 
   getUrl(file_name){
-    try {
         const storageRef = this.storage.ref(`inventory/${file_name}`);
         const url = storageRef.getDownloadURL();
         return url;
-    }
-    catch (FirebaseStorageError){
-     console.log('cant read  ', file_name);
-     return of({});
-    }
    }
 
   

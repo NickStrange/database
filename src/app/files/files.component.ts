@@ -60,12 +60,8 @@ export class FilesComponent {
       for (let row  of dat) {
         const inventory_item:Inventory = Inventory.makeInventory(row as any)
         console.log("create3", inventory_item.index);
-        //if (inventory_item.image1) {
-        //  this.inventoryService.getUrl(inventory_item.image1).subscribe(url => inventory_item.url1 = url);
-        //}
         this.get_image_names(inventory_item)
         this.get_url_for_image(inventory_item).then(dat => this.inventoryService.createInventory(inventory_item))
-        //this.inventoryService.createInventory(inventory_item);
       }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
@@ -81,13 +77,14 @@ export class FilesComponent {
    async get_url_for_image(inventory: Inventory){
     for (let i = 1; i < 6; i++){
       if (inventory['image'+i] ) {
-        inventory['url'+i]  = <string> await this.inventoryService.getUrl(inventory['image'+i]).toPromise()
-       // this.inventoryService.createInventory(inventory);
+        try{
+        inventory['url'+i]  = <string> await this.inventoryService.getUrl(inventory['image'+i]).
+        toPromise()}
+        catch(FirebaseStorageError){
+             console.log('Error ', inventory['image'+i]);
+        }
         };
     }}
- //   this.inventoryService.createInventory(inventory);
- //   console.log('read' , inventory['image'+i])
-
 
   exportAsExcelFile(excelFileName: string): void {
     let json: any[] = this.inventoryService.inventory;

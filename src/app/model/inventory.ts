@@ -84,23 +84,25 @@ export class Inventory {
             row.url3,
             row.url4,
             row.url5
-           // Inventory.decode_image_name(row.file1),
-           // Inventory.decode_image_name(row.file2),
-           // Inventory.decode_image_name(row.file3),
-           // Inventory.decode_image_name(row.file4),
-           // Inventory.decode_image_name(row.file5),  
         );
 
         return inventory;
     }
 
     public static decode_image_name(val): string{
-        const myRe = /.*remote:(.*jpg).*/;
-        const result = myRe.exec(val);
-        if (result){    
-            console.log('SEARCH',val, 'FOUND', result[1]);
-            return result[1]
-        }
+        const myRe = /.*remote:(.*(jpg|JPG)).*/;
+        const result = (myRe.exec(val));
+            if (result){    
+                const file = result[1].replace('JPG','jpg')
+                try{
+                    console.log('SEARCH',val, 'FOUND', file);
+                    return file
+                }
+                catch (FirebaseStorageError){
+                    console.log('cant read  ', file);
+                    return('Unknown File')
+                   }
+            }
         return '';
     }
 
@@ -128,17 +130,7 @@ export class Inventory {
         this.depth + " " +
         this.size_notes + " " +
         this.size_units + " " +
-        this.dimensions + " " +
-        this.file1 + " " +
-        this.file2 + " " +
-        this.file3 + " " +
-        this.file4 + " " +
-        this.file5 + " " +
-        this.url1 + " " +
-        this.url2 + " " +
-        this.url3 + " " +
-        this.url4 + " " +
-        this.url5    
+        this.dimensions + " "
         );
     }
     

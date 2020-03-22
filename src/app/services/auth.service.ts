@@ -1,12 +1,11 @@
-import { Injectable, NgZone, OnInit } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebaseui from 'firebaseui';
-import * as firebase from 'firebase/app';
 import { Observable, Subscriber } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user';
-import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -20,8 +19,7 @@ export class AuthService {
   userId$: Observable<string>;
   isReadWrite$: Observable<boolean>;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore,
-    private router:Router, private ngZone: NgZone) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
 
 
   login() {
@@ -40,8 +38,7 @@ export class AuthService {
            err => console.log('Error in ', err))
       })
     });
-    this.isReadWrite$ = this.isAdmin$.pipe(isAdmin => isAdmin);
-      
+    this.isReadWrite$ = this.isAdmin$.pipe(isAdmin => isAdmin);   
    }
 
    setui(ui){
@@ -55,6 +52,5 @@ export class AuthService {
 
   logOut() {
     this.afAuth.auth.signOut();
- //  this.ui.delete();
   }
 }

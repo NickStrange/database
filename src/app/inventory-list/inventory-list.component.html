@@ -7,6 +7,7 @@
     <span aria-hidden="true" (click)="clearSearch()" class="text-danger fa-2x">&times;</span>
     </div>
 
+    <div>
     <table class="table table-hover">
         <thead class="title">
           <tr>
@@ -33,26 +34,31 @@
  
             <th nowrap><button  (click)="sort(true, 'depth')"                   class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Depth                       <button  (click)="sort(false, 'depth')"                     class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
             <th nowrap><button  (click)="sort(true, 'size_notes')"              class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Size Notes                  <button  (click)="sort(false, 'size_notes')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></th>
-            <th>url1</th>
-            <th>url2</th>
-            <th>url3</th>
-            <th>url4</th>
-            <th>url5</th>
-            <th>File1</th>
-            <th>File2</th>
-            <th>File3</th>
-            <th>File4</th>
-            <th>File5</th>
             <th>image1</th>
             <th>image2</th>
             <th>image3</th>
             <th>image4</th>
             <th>image5</th>
+            <th>file1</th>
+            <th>file2</th>
+            <th>file3</th>
+            <th>file4</th>
+            <th>file5</th>
+            <th>File1</th>
+            <th>File2</th>
+            <th>File3</th>
+            <th>File4</th>
+            <th>File5</th>
+            <th>url1</th>
+            <th>url2</th>
+            <th>url3</th>
+            <th>url4</th>
+            <th>url5</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <ng-container *ngFor="let inventory of inventoryService.inventory">
-          <tr *ngIf="inventory.includes_string(searchText)">
+          <tr *ngIf="inventory.includes_string(searchText)" >
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
@@ -65,37 +71,42 @@
             <td nowrap> {{ inventory.index }} </td>
             <td nowrap> {{ inventory.item_id }} </td>
             <td nowrap> {{ inventory.source }}</td>
-            <td       > {{ inventory.notes }}</td>
-            <td       > {{ inventory.location }}</td>
+            <td nowrap> {{ inventory.notes.substring(0,20)  }}</td>
+            <td nowrap> {{ inventory.location.substring(0,20)  }}</td>
             <td nowrap> {{ inventory.value }}</td>
             <td nowrap> {{ inventory.inventory_date }}</td>
             <td nowrap> {{ inventory.title }}</td>
-            <td       > {{ inventory.series }}</td>
+            <td nowrap> {{ inventory.series.substring(0,20) }}</td>
             <td nowrap> {{ inventory.type}}</td>
             <td nowrap> {{ inventory.date_year }}</td>
-            <td       > {{ inventory.medium }}</td>
-            <td       > {{ inventory.signatures_and_writing }}</td>
-            <td       > {{ inventory.condition }}</td>
+            <td nowrap> {{ inventory.medium.substring(0,20) }}</td>
+            <td nowrap> {{ inventory.signatures_and_writing.substring(0,20)}}</td>
+            <td nowrap> {{ inventory.condition.substring(0,20) }}</td>
             <td nowrap> {{ inventory.category }}</td>
             <td nowrap> {{ inventory.height }}</td>
             <td nowrap> {{ inventory.width }}</td>
             <td nowrap> {{ inventory.depth }}</td>
-            <td nowrap> {{ inventory.size_notes }}</td>
-            <td nowrap> <ng-container *ngIf="inventory.url1 as url"><img width="50" [src]="url"></ng-container></td>
-            <td nowrap> <ng-container *ngIf="inventory.url2 as url"><img width="50" [src]="url"></ng-container></td>
-            <td nowrap> <ng-container *ngIf="inventory.url3 as url"><img width="50" [src]="url"></ng-container></td>
-            <td nowrap> <ng-container *ngIf="inventory.url4 as url"><img width="50" [src]="url"></ng-container></td>
-            <td nowrap> <ng-container *ngIf="inventory.url5 as url"><img width="50" [src]="url"></ng-container></td>
+            <td nowrap> {{ inventory.size_notes.substring(0,20)}}</td>
+            <td nowrap> <ng-container *ngIf="inventory.url1 as url"><img height="40" [src]="url"></ng-container></td>
+            <td nowrap> <ng-container *ngIf="inventory.url2 as url"><img height="40" [src]="url"></ng-container></td>
+            <td nowrap> <ng-container *ngIf="inventory.url3 as url"><img height="40" [src]="url"></ng-container></td>
+            <td nowrap> <ng-container *ngIf="inventory.url4 as url"><img height="40" [src]="url"></ng-container></td>
+            <td nowrap> <ng-container *ngIf="inventory.url5 as url"><img height="40" [src]="url"></ng-container></td>
             <td nowrap> {{ inventory.file1 }}</td>
             <td nowrap> {{ inventory.file2 }}</td>
             <td nowrap> {{ inventory.file3 }}</td>
             <td nowrap> {{ inventory.file4 }}</td>
             <td nowrap> {{ inventory.file5 }}</td>
             <td nowrap> {{ inventory.image1 }}</td>
-            <td nowrap> {{ inventory.image2}}</td>
+            <td nowrap> {{ inventory.image2 }}</td>
             <td nowrap> {{ inventory.image3 }}</td>
             <td nowrap> {{ inventory.image4 }}</td>
             <td nowrap> {{ inventory.image5 }}</td>
+            <td nowrap> {{ inventory.url1 }}</td>
+            <td nowrap> {{ inventory.url2 }}</td>
+            <td nowrap> {{ inventory.url3 }}</td>
+            <td nowrap> {{ inventory.url4 }}</td>
+            <td nowrap> {{ inventory.url5 }}</td>
             <td>
               <div class="btn-group">
                 <button class="btn btn-primary" (click)="showInventory(inventory)"><fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon></button>
@@ -109,6 +120,7 @@
           </ng-container>
         </tbody>
       </table>
+      </div>
     </div>
     
   

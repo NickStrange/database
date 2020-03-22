@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
-import { Observable } from 'rxjs';
 import { faPencilAlt, faTrash, faChevronCircleUp, faChevronCircleDown, faEye} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
@@ -55,12 +54,6 @@ export class InventoryListComponent implements OnInit {
        }
     );
   }
-  //url$: Observable<string>;
-
-  //getUrl(file_name){
-  //var storageRef = this.storage.ref(`Inventory/${file_name}`);
-  // this.url$= storageRef.getDownloadURL();
-  //}
 
   clearSearch(){
     this.searchText='';
