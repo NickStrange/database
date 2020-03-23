@@ -43,6 +43,10 @@ export class FilesComponent {
     this.readExcel();
   }
 
+  writeCsv (){
+    
+  }
+
   readExcel() {
     console.log("starting");
     let readFile = new FileReader();

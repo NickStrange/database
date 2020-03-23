@@ -13,7 +13,7 @@ service cloud.firestore {
         }
     
     
-        match /contacts/{contactid}{
+        match /inventory/{contactid}{
             allow read: if isAuthenticated();
             allow write: if isAuthenticated(); 
         }
