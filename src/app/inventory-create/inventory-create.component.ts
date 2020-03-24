@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
 import { Inventory } from '../model/inventory';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '../services/dialog.service';
 
 @Component({

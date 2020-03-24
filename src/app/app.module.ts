@@ -18,7 +18,8 @@ import { AuthService } from './services/auth.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDialogModule, MatFormFieldModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { InventoryCreateComponent } from './inventory-create/inventory-create.component';
 

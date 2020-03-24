@@ -74,9 +74,11 @@ function walk(ctx) {
                 }
                 break;
             case ts.SyntaxKind.JSDocAugmentsTag:
+            case ts.SyntaxKind.JSDocAuthorTag:
                 // OK
                 break;
             case ts.SyntaxKind.JSDocClassTag:
+            case ts.SyntaxKind.JSDocThisTag:
             case ts.SyntaxKind.JSDocTypeTag:
             case ts.SyntaxKind.JSDocTypedefTag:
             case ts.SyntaxKind.JSDocPropertyTag:
