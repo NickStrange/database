@@ -50,6 +50,7 @@ export class InventoryService  {
               else {
                 count+=1;
               }
+              console.log(count, inventory_item)
               this.inventory.push(inventory_item);
       });
      }
