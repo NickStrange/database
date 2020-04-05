@@ -5,166 +5,227 @@
     color: red;
 } 
 
-.wide-screen {
-    width: 5000px;
+.container {
+    display: inline-grid;
+    grid-template-columns: repeat(26, auto);
+    font-size: 0.5em;
+    font-weight: bold;
+    grid-gap: 0.5px;
+    padding: 0; 
+    border: 0.5px solid rgb(140, 0, 255);
+    background-color: rgb(2, 0, 0);
+    }
+     
+.detail-row {
+    margin: 0px;
+    border: 0px;
+}
+.gggg {
+    background-color: rgb(68, 192, 85)  
 }
 
-.float-left {
-    width: 300px; 
-    min-height: 1px;
+.inner-span  {
+    display: inline-block;
+    overflow: hidden;
+    background-color: inherit;
+    padding-left: 2px;
+    margin: 0px;
+    border: 0px;
+    }
+
+.inner-control  {
+    display: inline-block;
+    background-color: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    border: 0px;
+    }
+
+
+.title-element {
+    display: inline-block;
+    white-space: nowrap;
+    padding:0px; 
+    margin: 0px;
+}
+.body-element {
+    padding:0px; 
+    margin: 0px;
 }
 
 .control-column{
-    width:150px; 
+    width:100px; 
     min-height: 1px;
-    float: left;
     overflow: hidden;
+    display: inline-block; 
 }
 
 .index-column{
-    width:150px; 
+    width:130px; 
     min-height: 1px;
-    float: left;
     overflow: hidden;
+    white-space: nowrap;
+    display: inline-block; 
 }
 
 .item-id-column{
-    width:200px; 
+    width:140px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .source-column{
-    width:200px; 
+    width:175px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .notes-column{
     width:150px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .location-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .value-column{
-    width:200px; 
+    width:130px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .inventory-date-column{
-    width:300px; 
+    width:200px; 
     min-height: 1px;
-    float: left;
-    overflow: hidden;
+    display: inline-block; 
+    overflow: hidden;   
+    white-space: nowrap;
 }
 
 .title-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .series-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .type-column{
     width:150px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .date-year-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .medium-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 
 .signatures-and-writing-column{
     width:300px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .condition-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .category-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .height-column{
-    width:200px; 
+    width:130px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .width-column{
-    width:200px; 
+    width:130px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .depth-column{
-    width:200px; 
+    width:130px; 
     min-height: 1px;
-    float: left;
-    overflow: hidden;
+    display: inline-block; 
+    overflow: hidden;    
+    white-space: nowrap;
 }
 
 .size-notes-column{
     width:200px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .image-column{
-    width:75px; 
+    width:50px; 
     min-height: 1px;
-    float: left;
-    overflow: hidden;
+    /* display: inline-block;  */
+    /* overflow: hidden;
+    white-space: nowrap; */
 }
 
 .d-column{
     width:75px; 
     min-height: 1px;
-    float: left;
+    display: inline-block; 
     overflow: hidden;
+    white-space: nowrap;
 }

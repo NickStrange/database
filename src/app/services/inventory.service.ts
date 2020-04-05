@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class InventoryService  {
 
   inventory: Inventory[] = [];
+  inventory$: Observable<Inventory[]>;
 
   count = 0;
   
@@ -54,7 +55,9 @@ export class InventoryService  {
               this.inventory.push(inventory_item);
       });
      }
-    )).subscribe( x => this.ngZone.run(() => this.router.navigateByUrl('/inventory-list')));
+    )).subscribe( x => 
+      { this.inventory$ = of(this.inventory)
+        this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'))});
   }
 
   getUrl(file_name){
@@ -121,5 +124,6 @@ export class InventoryService  {
        }
        return 0;
      });
+     console.log('SORTED');
   }
 }

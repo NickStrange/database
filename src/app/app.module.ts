@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { InventoryCreateComponent } from './inventory-create/inventory-create.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -37,6 +38,7 @@ import { InventoryCreateComponent } from './inventory-create/inventory-create.co
     InventoryCreateComponent
   ],
   imports: [BrowserModule, 
+    ScrollingModule,
     AppRoutingModule, 
     FormsModule, 
     FontAwesomeModule,
