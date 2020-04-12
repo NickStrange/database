@@ -1,13 +1,13 @@
 
-<!-- <div style="width: 4000px"> -->
   <div class="title" style="margin-top: 50px;">
     &nbsp;
-    <label>Search&nbsp;
+    <button (click)="startSearch()">Search</button>&nbsp;
+    <!-- <label>Search&nbsp; -->
       <input [(ngModel)]="searchText" type="text" name="fileName">
-    </label>
+    <!-- </label> -->
     <span aria-hidden="true" (click)="clearSearch()" class="text-danger fa-2x">&times;</span>
   </div>     
-  <cdk-virtual-scroll-viewport style="height:900px" itemSize="10">
+  <cdk-virtual-scroll-viewport style="height:800px" itemSize="10">
    <div class="title-element"> 
     <div class="inner-span title-element count-column"></div>
     <div class="inner-span title-element control-column"></div>
@@ -43,7 +43,6 @@
     <div class="inner-span title-element d-column"></div>
     </div>
       <ng-container *cdkVirtualFor="let inventory of inventoryService.inventory$|async; let row_index = index">
-      <ng-container *ngIf="(searchText == '') || (inventory.toString().toUpperCase().includes(searchText.toUpperCase()))">
         <div [style.background-color]="get_color(row_index)"> 
         <div class="inner-span count-column">                 {{ row_index }}</div>
         <div class="inner-control detail-row  control-column">
@@ -128,8 +127,6 @@
         <!-- <div>&nbsp;ddd</div> -->
         <!-- </div> -->
         </div>
-        <!-- </div> -->
     </ng-container>
-  </ng-container>
   </cdk-virtual-scroll-viewport>
-<!-- </div> -->
+

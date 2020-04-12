@@ -66,6 +66,11 @@ export class InventoryListComponent implements OnInit {
 
   clearSearch(){
     this.searchText='';
+    this.inventoryService.clearSearch();
+
+  }
+  startSearch(){
+    this.inventoryService.search(this.searchText);
   }
 
   sort(direction:boolean, field:String){

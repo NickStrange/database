@@ -125,4 +125,18 @@ export class InventoryService  {
      });
      this._inventory_bh.next(Object.assign([], this.inventory));
   }
+
+  clearSearch(){
+    this._inventory_bh.next(Object.assign([], this.inventory));
+  }
+
+  search(text){
+    console.log('SEARCH FOR ', text)
+    if (text){
+      console.log('SEARCHING FOR ', text)
+      let searched_array = this.inventory.filter(item => item.toString().toUpperCase().includes(text.toUpperCase()))
+      this._inventory_bh.next(searched_array);
+    }
+
+  }
 }
