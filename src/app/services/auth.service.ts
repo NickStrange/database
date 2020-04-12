@@ -18,6 +18,7 @@ export class AuthService {
   isAdmin$: Observable<boolean>;
   userId$: Observable<string>;
   isReadWrite$: Observable<boolean>;
+  name$: Observable<string>;
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
 
@@ -34,6 +35,17 @@ export class AuthService {
          .snapshotChanges().subscribe(snap => {
             let user = snap.payload.data() as User;
             observer.next(user? !!user.isAdmin: null)
+           },
+           err => console.log('Error in ', err))
+      })
+    });
+    this.name$ = new Observable((observer: Subscriber <string>) => {
+    this.userId$.subscribe(userid => {
+      let isAdmin = this.db.doc(`users/${userid}`)
+         .snapshotChanges().subscribe(snap => {
+            let user = snap.payload.data() as User;
+            console.log('reading name', user)
+            observer.next(user.name)
            },
            err => console.log('Error in ', err))
       })

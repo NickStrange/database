@@ -19,7 +19,7 @@ export class InventoryListComponent implements OnInit {
   faChevronUp = faChevronCircleUp;
   faChevronDown = faChevronCircleDown;
   faeyeicon = faEye;
-  searchText : String='';
+  searchText : string='';
 
   selectedInventory: Inventory;
 

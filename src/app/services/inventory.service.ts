@@ -1,10 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Inventory} from '../model/inventory';
-import { Observable, from } from 'rxjs';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -13,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class InventoryService  {
 
-  inventory: Inventory[] = [];
-  inventory$: Observable<Inventory[]>;
+  public inventory: Inventory[] = [];
+  private _inventory_bh = new BehaviorSubject<Inventory[]>([])
+  inventory$  = this._inventory_bh.asObservable();
 
   count = 0;
   
@@ -56,7 +56,8 @@ export class InventoryService  {
       });
      }
     )).subscribe( x => 
-      { this.inventory$ = of(this.inventory)
+      { 
+        this._inventory_bh.next(this.inventory)
         this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'))});
   }
 
@@ -65,7 +66,6 @@ export class InventoryService  {
         const url = storageRef.getDownloadURL();
         return url;
    }
-
   
   public createInventory(inventory_item) : Observable <any>{
     return from(this.db.doc(`inventory/${inventory_item.item_id}`).set({
@@ -96,7 +96,6 @@ export class InventoryService  {
     return 1000;
   }
 
-
     //  sort artworks up or down
     sortInventory(field, down) {
        let direction = down ? 1 : -1;
@@ -124,6 +123,6 @@ export class InventoryService  {
        }
        return 0;
      });
-     console.log('SORTED');
+     this._inventory_bh.next(Object.assign([], this.inventory));
   }
 }

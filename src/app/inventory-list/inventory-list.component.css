@@ -20,9 +20,7 @@
     margin: 0px;
     border: 0px;
 }
-.gggg {
-    background-color: rgb(68, 192, 85)  
-}
+
 
 .inner-span  {
     display: inline-block;
@@ -58,6 +56,15 @@
     width:100px; 
     min-height: 1px;
     overflow: hidden;
+    display: inline-block; 
+}
+
+.count-column{
+    width:50px; 
+    text-align: right;
+    min-height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
     display: inline-block; 
 }
 
