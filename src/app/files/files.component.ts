@@ -44,7 +44,7 @@ export class FilesComponent {
   }
 
   writeCsv (){
-    
+    this.exportAsExcelFile(this.fileName)
   }
 
   readExcel() {

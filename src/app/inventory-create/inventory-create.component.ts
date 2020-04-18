@@ -4,6 +4,7 @@ import { Inventory } from '../model/inventory';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '../services/dialog.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-inventory-create',
@@ -20,7 +21,7 @@ export class InventoryCreateComponent implements OnInit {
 
   constructor(public dataService: InventoryService, private router:Router, 
     private route:ActivatedRoute, private dialog: MatDialog,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService, public authService: AuthService) { }
 
   ngOnInit() {
     this.item_id = this.route.snapshot.params['item_id'];

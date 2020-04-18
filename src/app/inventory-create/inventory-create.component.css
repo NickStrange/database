@@ -1,0 +1,9 @@
+.small_label {
+    width:100px; 
+    text-align: right;
+}
+
+input.wide_input{
+    width: 100%;  
+
+}
