@@ -39,6 +39,18 @@ export class AuthService {
            err => console.log('Error in ', err))
       })
     });
+
+    this.isReadWrite$ = new Observable((observer: Subscriber <boolean>) => {
+      this.userId$.subscribe(userid => {
+        let readWrite = this.db.doc(`users/${userid}`)
+           .snapshotChanges().subscribe(snap => {
+              let user = snap.payload.data() as User;
+              observer.next(user? !!user.readWrite: null)
+             },
+             err => console.log('Error in ', err))
+        })
+      });
+    
     this.name$ = new Observable((observer: Subscriber <string>) => {
     this.userId$.subscribe(userid => {
       let isAdmin = this.db.doc(`users/${userid}`)
@@ -49,8 +61,7 @@ export class AuthService {
            },
            err => console.log('Error in ', err))
       })
-    });
-    this.isReadWrite$ = this.isAdmin$.pipe(isAdmin => isAdmin);   
+    });  
    }
 
    setui(ui){

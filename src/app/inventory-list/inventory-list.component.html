@@ -11,7 +11,6 @@
    <div class="title-element"> 
     <div class="inner-span title-element count-column"></div>
     <div class="inner-span title-element control-column"></div>
-    <div class="inner-span title-element index-column">                 <button (click)="sort(true, 'index')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Index                  <button (click)="sort(false, 'index')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>
     <div class="inner-span title-element item-id-column">               <button (click)="sort(true, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                <button (click)="sort(false, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>
     <div class="inner-span title-element source-column">                <button (click)="sort(true, 'source')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Source                 <button (click)="sort(false, 'source')"                 class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>
     <div class="inner-span title-element notes-column">                 <button (click)="sort(true, 'notes')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Notes                  <button (click)="sort(false, 'notes')"                  class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>
@@ -44,23 +43,24 @@
     </div>
       <ng-container *cdkVirtualFor="let inventory of inventoryService.inventory$|async; let row_index = index">
         <div [style.background-color]="get_color(row_index)"> 
-        <div class="inner-span count-column">                 {{ row_index }}</div>
+        <div class="inner-span count-column">                 {{ row_index + 1}}</div>
         <div class="inner-control detail-row  control-column">
             <div class="btn-group">
               <button style="font-size:10px"  class="btn btn-primary" (click)="showInventory(inventory)">
                 <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
               </button> 
               <ng-container *ngIf="authService.isReadWrite$|async">
-                <button style="font-size:10px"  class="btn btn-danger" (click)="showInventory(inventory)">
-                  <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
+                <button style="font-size:10px"  class="btn btn-primary" (click)="updateInventory(inventory)">
+                  <fa-icon class="fa-xs" [icon]="faPencil"></fa-icon>
                 </button> 
-                <button style="font-size:10px"  class="btn btn-primary" (click)="showInventory(inventory)">
-                  <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
-                </button> 
+                <ng-container *ngIf="authService.isAdmin$|async">
+                  <button style="font-size:10px"  class="btn btn-primary" (click)="deleteInventory(inventory)">
+                    <fa-icon class="fa-xs" [icon]="faTrash"></fa-icon>
+                  </button> 
+                </ng-container>
               </ng-container>
           </div>
         </div>
-        <div class="inner-span index-column">                  {{ inventory.index +  1 }} </div>
         <div class="inner-span item-id-column">                {{ inventory.item_id }} </div>
         <div class="inner-span source-column">                 {{ inventory.source }}</div>
         <div class="inner-span notes-column">                  {{ inventory.notes }}</div>
@@ -100,12 +100,14 @@
                 <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
               </button> 
               <ng-container *ngIf="authService.isReadWrite$|async">
-                <button style="font-size:10px"  class="btn btn-danger" (click)="showInventory(inventory)">
-                  <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
+                <button style="font-size:10px"  class="btn btn-primary" (click)="updateInventory(inventory)">
+                  <fa-icon class="fa-xs" [icon]="faPencil"></fa-icon>
                 </button> 
-                <button style="font-size:10px"  class="btn btn-primary" (click)="showInventory(inventory)">
-                  <fa-icon class="fa-xs" [icon]="faeyeicon"></fa-icon>
-                </button> 
+                <ng-container *ngIf="authService.isAdmin$|async">
+                  <button style="font-size:10px"  class="btn btn-primary" (click)="deleteInventory(inventory)">
+                    <fa-icon class="fa-xs" [icon]="faTrash"></fa-icon>
+                  </button> 
+                </ng-container>
               </ng-container>
           </div>
         </div>

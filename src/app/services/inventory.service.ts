@@ -15,6 +15,7 @@ export class InventoryService  {
   public inventory: Inventory[] = [];
   private _inventory_bh = new BehaviorSubject<Inventory[]>([])
   inventory$  = this._inventory_bh.asObservable();
+  max_values = new Map();
 
   count = 0;
   
@@ -23,18 +24,15 @@ export class InventoryService  {
 
 
   clear_inventory(){
-    this.inventory= []
+    this.inventory= [];
+    this.max_values = new Map();
   }
 
   remove_id(id){
-    for (let i =0; i < this.inventory.length ; i++){
-      if (this.inventory[i].item_id == id){
-          this.inventory.splice(i, 1)
-          console.log('deleted', id)
-          break;
-      }
+    this.inventory = this.inventory.filter(value =>  value.item_id != id);
+    this._inventory_bh.next(Object.assign([], this.inventory));
     }
-  }
+
 
   doInventory(){
         let count=0;
@@ -46,18 +44,20 @@ export class InventoryService  {
               const inventory_item: Inventory = Inventory.makeInventory(data);
               if (type  != 'added'){
                 this.remove_id(inventory_item.item_id);
-                console.log('remove', type);
               }
               else {
                 count+=1;
-              }
               console.log(count, inventory_item)
-              this.inventory.push(inventory_item);
+              this.check_max_values(inventory_item);
+            //  if (inventory_item.item_id.includes('AT.B')) {
+                  this.inventory.push(inventory_item);
+            //  }
+            }
       });
      }
     )).subscribe( x => 
       { 
-        this._inventory_bh.next(this.inventory)
+        this._inventory_bh.next(Object.assign([], this.inventory))
         this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'))});
   }
 
@@ -92,16 +92,39 @@ export class InventoryService  {
       return inventory;
     }
 
+  convertId(from:string):number{
+    return this.max_values.get(from);
+  }
+
   nextId():number{
+    console.log(this.max_values);
     return 1000;
   }
 
+  check_max_values(inventory_item: Inventory){
+    const res = inventory_item.item_id.split('.');
+    const intval = parseInt(res[2]);
+    if (!this.max_values.get(res[0])){
+      this.max_values.set(res[1], intval);
+      console.log(this.max_values)
+    } 
+    else {
+      if (intval> this.max_values.get(res[1])) {
+        this.max_values.set(res[1], intval);
+      }
+    }
+  }
+
     //  sort artworks up or down
-    sortInventory(field, down) {
+    sortInventory(field, down, searchText) {
        let direction = down ? 1 : -1;
        console.log('SORT ', field, down, direction, -direction);
    //sort array
-         this.inventory = this.inventory.sort(function(a, b) {
+       let text_to_sort = this.inventory;
+       if (searchText){
+         text_to_sort = this.search(searchText);
+       }
+         let sorted_inventory = text_to_sort.sort(function(a, b) {
        // both null - sort by contactId or if both the same
        console.log('TYPE', typeof(a[field]))
        let fielda = a[field];
@@ -123,7 +146,7 @@ export class InventoryService  {
        }
        return 0;
      });
-     this._inventory_bh.next(Object.assign([], this.inventory));
+     this._inventory_bh.next(Object.assign([], sorted_inventory));
   }
 
   clearSearch(){
@@ -136,6 +159,7 @@ export class InventoryService  {
       console.log('SEARCHING FOR ', text)
       let searched_array = this.inventory.filter(item => item.toString().toUpperCase().includes(text.toUpperCase()))
       this._inventory_bh.next(searched_array);
+      return searched_array;
     }
 
   }

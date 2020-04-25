@@ -58,7 +58,9 @@ export class InventoryListComponent implements OnInit {
     this.dialogService.openDialog('Delete', inventory.shortName(), 'No', 'Yes').subscribe(
         deleteflg => {
           if (deleteflg) {
+            console.log('Deleting ', inventory.item_id)
             this.inventoryService.deleteInventory(inventory.item_id).subscribe(val => console.log('update inventory', val), err => console.log('ERROR ', err))
+            this.searchText='';
           }
        }
     );
@@ -74,8 +76,8 @@ export class InventoryListComponent implements OnInit {
   }
 
   sort(direction:boolean, field:String){
-    console.log('Sort ', field, direction);
-    this.inventoryService.sortInventory(field, direction)
+    console.log('Sort ', field, direction, 'search text', this.searchText);
+    this.inventoryService.sortInventory(field, direction, this.searchText);
     console.log('redirecting');
    // window.location.reload();
     this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));

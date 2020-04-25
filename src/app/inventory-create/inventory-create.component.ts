@@ -23,6 +23,36 @@ export class InventoryCreateComponent implements OnInit {
     private route:ActivatedRoute, private dialog: MatDialog,
     private dialogService: DialogService, public authService: AuthService) { }
 
+   // dropdown_keys = ['Album', 'Box', 'Drawing', 'ElectroMedia', 'NoteBook', 'Painting', 'Photography', 'Poetry Poster']
+    drop_downs= new Map([
+      ['Album', 'A'],
+      ['Box', 'B'],
+      ['Drawing', 'D'],
+      ['ElectroMedia', 'E'],
+      ['NoteBook', 'N'],
+      ['Painting', 'P'],
+      ['Photography', 'PH'],
+      ['Poetry Poster', 'PP']]
+    )
+
+  set_option(value:string){
+    const shortName = this.drop_downs.get(value) 
+    const id = this.dataService.convertId(shortName) + 1;
+    const item_id ='AT.' + shortName + '.' + id.toString().padStart(4, '0');
+    this.inventory.item_id = item_id;
+    this.inventory.category = value;
+    console.log('set item_id', item_id);   
+  }
+
+  choose_option(e){
+    this.set_option(e.target.value)
+  }
+
+    getKeys(){
+      return Array.from(this.drop_downs.keys());
+    }
+    chosen_option: string;
+
   ngOnInit() {
     this.item_id = this.route.snapshot.params['item_id'];
     this.display_only = this.route.snapshot.params['display']=="true";
@@ -32,6 +62,7 @@ export class InventoryCreateComponent implements OnInit {
     if (this.isInsert) {
       this.label = 'Create';
       this.inventory = new Inventory('','','');
+      this.set_option('Painting')
       console.log('create new empty contact ', this.inventory);
     }
     else {
@@ -43,6 +74,7 @@ export class InventoryCreateComponent implements OnInit {
 
   createContact(){
     if (this.isInsert){
+      console.log('INSERTING', this.inventory);
       this.dataService.createInventory(this.inventory)
           .subscribe(val => console.log('create contact', val), 
               err => this.dialogService.openDialog('Error', err, 'close', ''))}

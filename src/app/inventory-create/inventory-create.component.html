@@ -16,34 +16,46 @@
               <ng-container *ngIf="inventory.url5 as url;"><img width="400" [src]="url"></ng-container>
             </div>
             <div class="form-group form-inline">
-              <label class="small_label" for="item_id">Item Id</label>&nbsp;
-              <input readonly [(ngModel)]="inventory.item_id" type="text" name="item_id" class="form-control" id="item_id">
-              <label class="small_label" for="source">Source</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.source" type="text" name="source" class="form-control" id="source">
-              <label class="small_label" for="value">Value</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.value" type="text" name="value" class="form-control" id="value">
+              <select  *ngIf="this.isInsert" class="custom-select"  (change)="choose_option($event) ">
+                <option  *ngFor ="let option of getKeys()"  [selected]="option=='Painting'">{{ option }}</option>
+              </select>
+              <label class="small_label" for="item_id" data-toggle="tooltip" title="Unique identifier">Item Id</label>&nbsp;
+              <input readonly [(ngModel)]="inventory.item_id" type="text" name="item_id" class="form-control" id="item_id">&nbsp;
+              <label class="small_label" for="source"  data-toggle="tooltip" title="Ownership">Source</label>&nbsp;
+              <div *ngIf="!display_only" class="form-group form-inline">
+                <select class="custom-select" name="source"  [(ngModel)]="inventory.source">
+                  <option [selected]="inventory.source=='Aldo foundation'">Aldo foundation</option>
+                  <option [selected]="inventory.source=='Anna'">Anna</option>
+                  <option [selected]="inventory.source=='Gifted'">Gifted</option>
+                </select>
+            </div>
+            <div *ngIf="display_only">
+              <input [readOnly]="true" [(ngModel)]="inventory.source" type="text" name="source" class="form-control" id="source">
+            </div>
+              <label class="small_label" for="value" data-toggle="tooltip" title="Value in dollars">Value$</label>&nbsp;
+              <input [readOnly]="display_only" [(ngModel)]="inventory.value" type="number" name="value" class="form-control" id="value">
              </div>
             <div class="form-group form-inline">
-              <label class="small_label" for="email">Inventory Date</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.inventory_date" type="text" name="email" class="form-control" id="email">
+              <label class="small_label" for="inventory_date">Inventory Date</label>&nbsp;
+              <input [readOnly]="display_only" [(ngModel)]="inventory.inventory_date" type="text" name="inventory_date" class="form-control" id="inventory_date">
               <label class="small_label" for="type">type</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.type" type="text" name="type" class="form-control" id="type">
-              <label class="small_label" for="date_year">Date Year</label>&nbsp;
+              <label class="small_label" for="date_year" data-toggle="tooltip" title="Date Year">Date Year</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.date_year" type="text" name="date_year" class="form-control" id="date_year">
             </div>
             <div class="form-group form-inline">
               <label class="small_label" for="condition">Condition</label>&nbsp;
               <input [readOnly]="display_only" [(ngModel)]="inventory.condition" type="text" name="condition" class="form-control" id="condition">
               <label class="small_label" for="category">Category</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.category" type="text" name="category" class="form-control" id="category">
+              <input readOnly [(ngModel)]="inventory.category" type="text" name="category" class="form-control" id="category">
             </div>
             <div class="form-group form-inline">
-              <label class="small_label" for="height">Height</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.height" type="text" name="height" class="form-control" id="height">
-              <label class="small_label" for="width">Width</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.width" type="text" name="width" class="form-control" id="width">
-              <label class="small_label" for="depth">Depth</label>&nbsp;
-              <input [readOnly]="display_only" [(ngModel)]="inventory.depth" type="text" name="depth" class="form-control" id="depth">
+              <label class="small_label" for="height" data-toggle="tooltip" title="Height in inches" >Height</label>&nbsp;
+              <input [readOnly]="display_only" [(ngModel)]="inventory.height" type="number" name="height" class="form-control" id="height">
+              <label class="small_label" for="width" data-toggle="tooltip" title="Width in inches" >Width</label>&nbsp;
+              <input [readOnly]="display_only" [(ngModel)]="inventory.width" type="number" name="width" class="form-control" id="width">
+              <label class="small_label" for="depth" data-toggle="tooltip" title="Depth in inches" >Depth</label>&nbsp;
+              <input [readOnly]="display_only" [(ngModel)]="inventory.depth" type="number" name="depth" class="form-control" id="depth">
             </div>
 
 
@@ -53,23 +65,23 @@
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="notes">Notes</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.notes" rows="1" cols="100" name="notes" class="form-control" id="notes"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.notes" cols="100" name="notes" class="form-control" id="notes"></textarea>
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="title">Title</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.title" rows="1" cols="100"  name="title" class="form-control" id="title"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.title" cols="100"  name="title" class="form-control" id="title"></textarea>
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="series">Series</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.series" rows="1" cols="100" name="series" class="form-control" id="series"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.series"  cols="100" name="series" class="form-control" id="series"></textarea>
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="location">Location</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.location" rows="1" cols="100"  name="location" class="form-control" id="location"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.location" cols="100"  name="location" class="form-control" id="location"></textarea>
             </div>
             <div class="form-group form-inline">  
               <label class="small_label"  for="medium">Medium</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.medium" rows="1" cols="100"  name="medium" class="form-control" id="medium"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.medium" cols="100"  name="medium" class="form-control" id="medium"></textarea>
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="signatures_and_writing">Signature And Wriiting</label>&nbsp;
@@ -82,22 +94,22 @@
             <input [readOnly]="display_only" [(ngModel)]="inventory.image1" type="text" name="image1" class="form-control" id="image1">
             <input [readOnly]="display_only" [(ngModel)]="inventory.url1" type="text" name="url1" class="form-control" id="url1">
 
-            <label for="file1">File1</label>&nbsp;
+            <label for="file2">File2</label>&nbsp;
             <input [readOnly]="display_only" [(ngModel)]="inventory.file2" type="text" name="file2" class="form-control" id="file2">
             <input [readOnly]="display_only" [(ngModel)]="inventory.image2" type="text" name="image2" class="form-control" id="image2">
             <input [readOnly]="display_only" [(ngModel)]="inventory.url2" type="text" name="url2" class="form-control" id="url2">
 
-            <label for="file1">File1</label>&nbsp;
+            <label for="file3">File3</label>&nbsp;
             <input [readOnly]="display_only" [(ngModel)]="inventory.file3" type="text" name="file3" class="form-control" id="file3">
             <input [readOnly]="display_only" [(ngModel)]="inventory.image3" type="text" name="image3" class="form-control" id="image3">
             <input [readOnly]="display_only" [(ngModel)]="inventory.url3" type="text" name="url3" class="form-control" id="url3">
 
-            <label for="file1">File1</label>&nbsp;
+            <label for="file4">File4</label>&nbsp;
             <input [readOnly]="display_only" [(ngModel)]="inventory.file4" type="text" name="file4" class="form-control" id="file4">
             <input [readOnly]="display_only" [(ngModel)]="inventory.image4" type="text" name="image4" class="form-control" id="image4">
             <input [readOnly]="display_only" [(ngModel)]="inventory.url4" type="text" name="url4" class="form-control" id="url4">
 
-            <label for="file1">File1</label>&nbsp;
+            <label for="file5">File5</label>&nbsp;
             <input [readOnly]="display_only" [(ngModel)]="inventory.file5" type="text" name="file5" class="form-control" id="file5">
             <input [readOnly]="display_only" [(ngModel)]="inventory.image5" type="text" name="image5" class="form-control" id="image5">
             <input [readOnly]="display_only" [(ngModel)]="inventory.url5" type="text" name="url15" class="form-control" id="url5">
