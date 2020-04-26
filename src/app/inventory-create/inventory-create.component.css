@@ -5,5 +5,9 @@
 
 input.wide_input{
     width: 100%;  
+}
 
+textarea {
+    width: 100px;
+    overflow-y: visible;
 }

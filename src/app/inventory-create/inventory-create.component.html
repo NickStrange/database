@@ -7,6 +7,9 @@
   
         <div>
           <form>
+            <button class="btn btn-primary" (click)="createContact()">{{label}} contact</button>
+            &nbsp;
+            <button class="btn btn-primary" (click)="cancel()">Cancel</button>
             
             <div class="form-group form-inline">
               <ng-container *ngIf="inventory.url1 as url;"><img width="400" [src]="url"></ng-container>
@@ -85,7 +88,7 @@
             </div>
             <div class="form-group form-inline">
               <label class="small_label"  for="signatures_and_writing">Signature And Wriiting</label>&nbsp;
-              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.signatures_and_writing" rows="1" cols="100" name="signatures_and_writing" class="form-control" id="signatures_and_writing"></textarea>
+              <textarea class="wide_input" [readOnly]="display_only" [(ngModel)]="inventory.signatures_and_writing"  name="signatures_and_writing" class="form-control" id="signatures_and_writing"></textarea>
             </div>
 
             <ng-container *ngIf="authService.isAdmin$| async">
