@@ -56,14 +56,11 @@ export class InventoryCreateComponent implements OnInit {
   ngOnInit() {
     this.item_id = this.route.snapshot.params['item_id'];
     this.display_only = this.route.snapshot.params['display']=="true";
-    console.log('DISPLAY ', "*"+this.route.snapshot.params['display']+"*",this.display_only);
     this.isInsert = this.item_id == undefined;
-    console.log('PASSED insert', this.isInsert);
     if (this.isInsert) {
       this.label = 'Create';
       this.inventory = new Inventory('','','');
       this.set_option('Painting')
-      console.log('create new empty contact ', this.inventory);
     }
     else {
       this.label = 'Update';
@@ -75,14 +72,10 @@ export class InventoryCreateComponent implements OnInit {
   createContact(){
     if (this.isInsert){
       console.log('INSERTING', this.inventory);
-      this.dataService.createInventory(this.inventory)
-          .subscribe(val => console.log('create contact', val), 
-              err => this.dialogService.openDialog('Error', err, 'close', ''))}
+      this.dataService.createInventory(this.inventory)}
     else {
-      this.dataService.updateInventory(this.inventory)
-          .subscribe(val => console.log('update contact', val), 
-              err => this.dialogService.openDialog("Error", err, 'close',''))}
-    this.router.navigateByUrl('/inventory-list');
+      this.dataService.updateInventory(this.inventory)}
+      this.router.navigateByUrl('/inventory-list');
   }
 
   cancel(){

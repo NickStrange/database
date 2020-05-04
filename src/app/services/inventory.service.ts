@@ -30,9 +30,16 @@ export class InventoryService  {
 
   remove_id(id){
     this.inventory = this.inventory.filter(value =>  value.item_id != id);
-    this._inventory_bh.next(Object.assign([], this.inventory));
     }
 
+  get_index(inventory_item){
+      for (let index in this.inventory){
+          if (this.inventory[index].item_id == inventory_item.item_id){
+            return index;
+          }
+      }
+      return -1;
+  }
 
   doInventory(){
         let count=0;
@@ -42,17 +49,18 @@ export class InventoryService  {
               const type = snap.type;
               const data = snap.payload.doc.data();
               const inventory_item: Inventory = Inventory.makeInventory(data);
-              if (type  != 'added'){
+              if (type == 'modified'){
+                 this.inventory[this.get_index(inventory_item)] = inventory_item;
+                 }
+              else if (type  == 'removed'){
                 this.remove_id(inventory_item.item_id);
               }
               else {
                 count+=1;
-              console.log(count, inventory_item)
-              this.check_max_values(inventory_item);
-            //  if (inventory_item.item_id.includes('AT.B')) {
-                  this.inventory.push(inventory_item);
-            //  }
+                this.check_max_values(inventory_item);
+                this.inventory.push(inventory_item);
             }
+            this._inventory_bh.next(Object.assign([], this.inventory));
       });
      }
     )).subscribe( x => 
@@ -67,23 +75,22 @@ export class InventoryService  {
         return url;
    }
   
-  public createInventory(inventory_item) : Observable <any>{
-    return from(this.db.doc(`inventory/${inventory_item.item_id}`).set({
+  public createInventory(inventory_item){
+    from(this.db.doc(`inventory/${inventory_item.item_id}`).set({
       ...inventory_item
     }));
   }
-  
-  public updateInventory(inventory: Inventory) : Observable <any>{
-    console.log('updating ', inventory.item_id)
-    return from(this.db.doc(`inventory/${inventory.item_id}`).update({
-      ...inventory
-    }));
+
+
+  public updateInventory(new_inventory: Inventory) {
+    this.db.doc(`inventory/${new_inventory.item_id}`).update({
+      ...new_inventory
+  }).then(() => console.log('UPDATING')) ;
   }
 
-  public deleteInventory(id: string): Observable <any>{ 
+  public deleteInventory(id: string){ 
     const contact = this.inventory.filter(artwork => artwork.item_id == id)[0]
-    console.log('DELETE ', id);
-    return from(this.db.doc(`inventory/${id}`).delete());
+    this.db.doc(`inventory/${id}`).delete();
   }
 
   public getInventory(id: string) :Inventory{

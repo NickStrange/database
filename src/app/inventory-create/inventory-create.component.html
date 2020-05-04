@@ -7,9 +7,15 @@
   
         <div>
           <form>
-            <button class="btn btn-primary" (click)="createContact()">{{label}} contact</button>
+            <div *ngIf="!display_only">
+            <button class="btn btn-primary" (click)="createContact()">{{label}} {{this.inventory.category}}</button>
             &nbsp;
             <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+            </div>
+            <div *ngIf="display_only">
+              <button class="btn btn-primary" (click)="cancel()">Done</button>
+            </div>
+            <p></p>
             
             <div class="form-group form-inline">
               <ng-container *ngIf="inventory.url1 as url;"><img width="400" [src]="url"></ng-container>
@@ -120,9 +126,14 @@
           </ng-container>
             
           </form>
-          <button class="btn btn-primary" (click)="createContact()">{{label}} contact</button>
-          &nbsp;
-          <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+          <div *ngIf="!display_only">
+            <button class="btn btn-primary" (click)="createContact()">{{label}} {{this.inventory.category}}</button>
+            &nbsp;
+            <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+            </div>
+            <div *ngIf="display_only">
+              <button class="btn btn-primary" (click)="cancel()">Done</button>
+            </div>
         </div>
       </div>
     </div>

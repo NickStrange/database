@@ -29,7 +29,6 @@ export class InventoryListComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-     //this.inventoryService.doInventory();
   }
 
   get_color(row_index):string{
@@ -59,7 +58,7 @@ export class InventoryListComponent implements OnInit {
         deleteflg => {
           if (deleteflg) {
             console.log('Deleting ', inventory.item_id)
-            this.inventoryService.deleteInventory(inventory.item_id).subscribe(val => console.log('update inventory', val), err => console.log('ERROR ', err))
+            this.inventoryService.deleteInventory(inventory.item_id);
             this.searchText='';
           }
        }
@@ -69,8 +68,8 @@ export class InventoryListComponent implements OnInit {
   clearSearch(){
     this.searchText='';
     this.inventoryService.clearSearch();
-
   }
+  
   startSearch(){
     this.inventoryService.search(this.searchText);
   }
@@ -78,8 +77,6 @@ export class InventoryListComponent implements OnInit {
   sort(direction:boolean, field:String){
     console.log('Sort ', field, direction, 'search text', this.searchText);
     this.inventoryService.sortInventory(field, direction, this.searchText);
-    console.log('redirecting');
-   // window.location.reload();
     this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));
   }
 }
