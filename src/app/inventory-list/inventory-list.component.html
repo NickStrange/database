@@ -1,5 +1,5 @@
 
-  <div class="title" style="margin-top: 50px;">
+  <div class="title bg-primary" style="margin-top: 50px;">
     &nbsp;
     <button (click)="startSearch()">Search</button>&nbsp;
     <!-- <label>Search&nbsp; -->
@@ -8,7 +8,7 @@
     <span aria-hidden="true" (click)="clearSearch()" class="text-danger fa-2x">&times;</span>
   </div>     
   <cdk-virtual-scroll-viewport style="height:800px" itemSize="10">
-   <div class="title-element"> 
+   <div class="title-element bg-primary"> 
     <div class="inner-span title-element count-column"></div>
     <div class="inner-span title-element control-column"></div>
     <div class="inner-span title-element item-id-column">               <button (click)="sort(true, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                <button (click)="sort(false, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>

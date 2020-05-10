@@ -103,10 +103,10 @@ export class InventoryService  {
     return this.max_values.get(from);
   }
 
-  nextId():number{
-    console.log(this.max_values);
-    return 1000;
-  }
+  // nextId():number{
+  //   console.log(this.max_values);
+  //   return 1000;
+  // }
 
   check_max_values(inventory_item: Inventory){
     const res = inventory_item.item_id.split('.');

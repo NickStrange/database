@@ -8,12 +8,13 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Foundation Contacts';
+  title = 'Foundation Inventory';
   faPencil = faPencilAlt;
   faTrash = faTrash;
 
   constructor(private afAuth: AuthService){
-
+     console.log('ENTRY');
+     this.afAuth.logOut();
   }
 
   ngOnInit(){
