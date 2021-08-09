@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
       private inventoryService: InventoryService) { }
   
     ngOnInit() {
-      console.log('new ui');
       this.ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(this.afAuth.auth);
       this.authService.setui(this.ui);
       this.logIn();
@@ -49,9 +48,6 @@ export class LoginComponent implements OnInit {
     }
   
     logOut() {
-      console.log('LOG OUT');
       this.authService.logOut();
-      console.log('LOGGED  OUT');
-      
     }
 }

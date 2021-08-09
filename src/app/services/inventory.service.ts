@@ -95,7 +95,6 @@ export class InventoryService  {
 
   public getInventory(id: string) :Inventory{
       const inventory = this.inventory.filter(inventory => inventory.item_id== id)[0]
-      console.log('found ' , inventory , ' for ', id);
       return inventory;
     }
 
@@ -112,8 +111,6 @@ export class InventoryService  {
     const res = inventory_item.item_id.split('.');
     const intval = parseInt(res[2]);
     if (!this.max_values.get(res[0])){
-      this.max_values.set(res[1], intval);
-      console.log(this.max_values)
     } 
     else {
       if (intval> this.max_values.get(res[1])) {
@@ -125,7 +122,6 @@ export class InventoryService  {
     //  sort artworks up or down
     sortInventory(field, down, searchText) {
        let direction = down ? 1 : -1;
-       console.log('SORT ', field, down, direction, -direction);
    //sort array
        let text_to_sort = this.inventory;
        if (searchText){
@@ -133,7 +129,6 @@ export class InventoryService  {
        }
          let sorted_inventory = text_to_sort.sort(function(a, b) {
        // both null - sort by contactId or if both the same
-       console.log('TYPE', typeof(a[field]))
        let fielda = a[field];
        let fieldb = b[field];
        if (typeof(a[field])=='string'){
@@ -161,9 +156,7 @@ export class InventoryService  {
   }
 
   search(text){
-    console.log('SEARCH FOR ', text)
     if (text){
-      console.log('SEARCHING FOR ', text)
       let searched_array = this.inventory.filter(item => item.toString().toUpperCase().includes(text.toUpperCase()))
       this._inventory_bh.next(searched_array);
       return searched_array;

@@ -41,23 +41,19 @@ export class InventoryListComponent implements OnInit {
   }
 
   public showInventory(inventory: Inventory){
-    console.log('show inventory ', inventory);
     this.router.navigateByUrl(`inventory-create/${inventory.item_id}/true`);
     this.selectedInventory = inventory;
   }
 
   public updateInventory(inventory: Inventory){
-    console.log('update inventory ', inventory);
     this.router.navigateByUrl(`inventory-create/${inventory.item_id}/false`);
     this.selectedInventory = inventory;
   }
 
   public deleteInventory(inventory: Inventory){
-    console.log('Deletimg ', inventory)
     this.dialogService.openDialog('Delete', inventory.shortName(), 'No', 'Yes').subscribe(
         deleteflg => {
           if (deleteflg) {
-            console.log('Deleting ', inventory.item_id)
             this.inventoryService.deleteInventory(inventory.item_id);
             this.searchText='';
           }
@@ -75,7 +71,6 @@ export class InventoryListComponent implements OnInit {
   }
 
   sort(direction:boolean, field:String){
-    console.log('Sort ', field, direction, 'search text', this.searchText);
     this.inventoryService.sortInventory(field, direction, this.searchText);
     this.ngZone.run(() => this.router.navigateByUrl('/inventory-list'));
   }

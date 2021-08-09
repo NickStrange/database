@@ -48,7 +48,6 @@ export class FilesComponent {
   }
 
   readExcel() {
-    console.log("starting");
     let readFile = new FileReader();
     readFile.onload = e => {
       this.storeData = readFile.result;
@@ -63,7 +62,6 @@ export class FilesComponent {
       const dat = XLSX.utils.sheet_to_json(this.worksheet, { raw: true });
       for (let row  of dat) {
         const inventory_item:Inventory = Inventory.makeInventory(row as any)
-        console.log("create3", inventory_item.index);
         this.get_image_names(inventory_item)
         this.get_url_for_image(inventory_item).then(dat => this.inventoryService.createInventory(inventory_item))
       }
@@ -85,14 +83,13 @@ export class FilesComponent {
         inventory['url'+i]  = <string> await this.inventoryService.getUrl(inventory['image'+i]).
         toPromise()}
         catch(FirebaseStorageError){
-             console.log('Error ', inventory['image'+i]);
+             console.log('Read Error ', inventory['image'+i]);
         }
         };
     }}
 
   exportAsExcelFile(excelFileName: string): void {
     let json: any[] = this.inventoryService.inventory;
-    console.log("writing", excelFileName, json);
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = {
       Sheets: { data: worksheet },
@@ -106,12 +103,10 @@ export class FilesComponent {
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
-    console.log("writing");
     const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
     FileSaver.saveAs(
       data,
       fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
     );
-    console.log("written");
   }
 }

@@ -34,6 +34,7 @@
     <div class="inner-span title-element image-column"></div>
     <div class="inner-span title-element image-column"></div>
     <div class="inner-span title-element image-column"></div>
+    <div class="inner-span title-element item-id-column">               <button (click)="sort(true, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronUp"></fa-icon></button>Item Id                <button (click)="sort(false, 'item_id')"                class="btn"><fa-icon class="chevron" [icon]="faChevronDown"></fa-icon></button></div>
     <div class="inner-span title-element control-column"></div>
     <div class="inner-span title-element d-column"></div>
     <div class="inner-span title-element d-column"></div>
@@ -94,6 +95,7 @@
         <div class="inner-span image-column">
           <ng-container *ngIf="inventory.url5 as url"><img height="30px" [src]="url"></ng-container>
         </div>
+        <div class="inner-span item-id-column">                {{ inventory.item_id }} </div>
         <div class="inner-control control-column">
             <div class="btn-group">
               <button style="font-size:10px"  class="btn btn-primary" (click)="showInventory(inventory)">

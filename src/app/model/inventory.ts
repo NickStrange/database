@@ -94,15 +94,15 @@ export class Inventory {
         const result = (myRe.exec(val));
             if (result){    
                 const file = result[1].replace('JPG','jpg')
-                try{
-                    console.log('SEARCH',val, 'FOUND', file);
+         //       try{
                     return file
-                }
-                catch (FirebaseStorageError){
-                    console.log('cant read  ', file);
-                    return('Unknown File')
-                   }
+           //     }
+           //     catch (FirebaseStorageError){
+           //         console.log('cant read  ', file);
+           //         return('Unknown File')
+            //       }
             }
+        return val;
         return '';
     }
 

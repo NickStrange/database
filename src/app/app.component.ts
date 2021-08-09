@@ -13,7 +13,6 @@ export class AppComponent {
   faTrash = faTrash;
 
   constructor(private afAuth: AuthService){
-     console.log('ENTRY');
      this.afAuth.logOut();
   }
 

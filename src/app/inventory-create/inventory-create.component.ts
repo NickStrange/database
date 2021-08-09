@@ -41,7 +41,6 @@ export class InventoryCreateComponent implements OnInit {
     const item_id ='AT.' + shortName + '.' + id.toString().padStart(4, '0');
     this.inventory.item_id = item_id;
     this.inventory.category = value;
-    console.log('set item_id', item_id);   
   }
 
   choose_option(e){
@@ -65,13 +64,11 @@ export class InventoryCreateComponent implements OnInit {
     else {
       this.label = 'Update';
       this.inventory = this.dataService.getInventory(this.item_id);
-      console.log('in update', this.inventory);
     }
   }
 
   createContact(){
     if (this.isInsert){
-      console.log('INSERTING', this.inventory);
       this.dataService.createInventory(this.inventory)}
     else {
       this.dataService.updateInventory(this.inventory)}

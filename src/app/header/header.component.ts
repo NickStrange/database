@@ -17,8 +17,6 @@ export class HeaderComponent implements OnInit {
   }
 
   clicked(){
-
-    console.log('clicked login/logount')
     this.authService.logOut();
   }
 

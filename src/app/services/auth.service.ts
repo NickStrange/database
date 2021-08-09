@@ -56,7 +56,6 @@ export class AuthService {
       let isAdmin = this.db.doc(`users/${userid}`)
          .snapshotChanges().subscribe(snap => {
             let user = snap.payload.data() as User;
-            console.log('reading name', user)
             observer.next(user.name)
            },
            err => console.log('Error in ', err))
